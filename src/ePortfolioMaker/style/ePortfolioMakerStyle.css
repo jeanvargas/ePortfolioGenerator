@@ -1,0 +1,94 @@
+/** 
+ *  This CSS provides all the style settings for
+ *  our JavaFX controls.
+ *
+ *  @author McKilla Gorilla & _____________
+ */
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+.slide_show_edit_vbox {
+    -fx-background-radius: 5.0;
+    -fx-background-color: rgb(205, 207, 208);
+    -fx-border-color: rgb(200, 200, 200);
+}
+
+.slide_edit_view {
+    -fx-font-family: 'Montserrat', sans-serif;  
+    -fx-font-size: 15px;
+    -fx-background-radius: 10.0;
+    -fx-background-color: rgb(253, 242, 201);
+    -fx-border-color: rgb(70, 5, 5);
+    -fx-border-thickness: 10px;
+    -fx-spacing: 60px;
+}
+
+.selected_slide_edit_view {
+    -fx-background-radius: 10.0;
+    -fx-background-color: rgb(250, 229, 146);
+    -fx-border-color: rgb(200, 200, 200);
+    -fx-border-thickness: 10px;
+    -fx-spacing: 60px;
+}
+
+.file_toolbar {
+    -fx-border-color: rgb(200, 200, 200);
+    -fx-border-thickness: 60px;
+}
+
+.file_toolbar_button {
+    -fx-padding-left: 10px;
+    -fx-padding-right: 20px;
+    //-fx-background-color: rgb(70, 70, 70);
+    
+}
+
+.workspace_mode_toolbar {
+   // -fx-background-color: rgb(70, 70, 70);
+   // -fx-background-radius: 10.0;
+    -fx-border-color: rgb(200, 200, 200);
+    -fx-border-radius: 10.0;
+    -fx-border-thickness: 60px;
+    -fx-alignment: CENTER;
+    -fx-spacing: 5px;
+}
+
+.workspace_mode_toolbar_button {
+ // -fx-background-color: rgb(70, 70, 70);
+}
+
+.site_toolbar {
+   // -fx-background-color: rgb(70, 70, 70);
+   -fx-alignment:TOP_CENTER;
+   -fx-border-color: rgb(200, 200, 200);
+   -fx-border-thickness: 60px;
+}
+
+.site_toolbar_button {
+    //-fx-background-color: rgb(250, 229, 146);
+    //-fx-padding: 10px 10px 10px 10px;
+    //-fx-spacing: 50px;
+}
+
+.page_editor_workspace {
+  -fx-border-color: rgb(200, 200, 200);
+  -fx-border-thickness: 60px;
+  -fx-background-color: rgb(170, 170, 170);  
+}
+
+.language_dialog {
+    -fx-font-family: 'Montserrat', sans-serif; 
+    -fx-font-size: 20px;
+    -fx-background-color: rgb(205, 207, 208); //gray
+   // -fx-border-color: rgb(70, 5, 5);
+    -fx-spacing: 60px;
+    -fx-effect: dropshadow(gaussian, rgb(162,162,162), 10, 0, 0, 15);
+    -fx-border-radius: 25px;
+    
+}
+
+.language_background {
+    -fx-background-radius: 10.0;
+    -fx-background-color: rgb(250, 229, 146);//yellow
+    -fx-border-color: rgb(70, 5, 5);
+    -fx-border-thickness: 10px;
+    -fx-spacing: 60px;
+}
