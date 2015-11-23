@@ -43,7 +43,6 @@ public class ePortfolioModel {
     public void clear() {
         pages.clear();
         PropertiesManager props = PropertiesManager.getPropertiesManager();
-        title = props.getProperty(LanguagePropertyType.DEFAULT_PORTFOLIO_TITLE);
         selectedPage = null;
     }
     

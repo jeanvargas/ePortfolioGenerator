@@ -53,12 +53,10 @@ public class StartupConstants {
  
     public static String ICON_SELECT_LAYOUT_TEMPLATE;
     public static String ICON_SELECT_COLOR_TEMPLATE;
-    public static String ICON_SELECT_BANNER_IMAGE;
+    public static String ICON_SELECT_BANNER_IMAGE = "addBannerImage.png";
     
     public static String ICON_SELECT_COMP_FONT;
     
-    public static String ICON_UPDATE_PAGE_TITLE;
-    public static String ICON_UPDATE_STUDENT_NAME;
     public static String ICON_UPDATE_FOOTER;
     
     public static String ICON_ADD_TEXT_COMP;
@@ -99,6 +97,8 @@ public class StartupConstants {
     public static String LABEL_EPORTFOLIO_TITLE = "ePortfolio_title";
     public static String LABEL_PAGE_TITLE = "page_title";
     
+    public static String DEFAULT_STUDENT_NAME = "ENTER NAME";
+    public static String DEFAULT_PAGE_TITLE = "ENTER TITLE";
     
    // public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
    // public static String    LABEL_LANGUAGE_SELECTION_PROMPT = "Select a Language:";

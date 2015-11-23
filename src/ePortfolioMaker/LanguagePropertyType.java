@@ -45,12 +45,9 @@ public enum LanguagePropertyType {
         
    TOOLTIP_NAVIGATE_SITE,
    
-   //DEFAULT VALUES
-   DEFAULT_PORTFOLIO_TITLE,
-   DEFAULT_STUDENT_NAME,
-   DEFAULT_PAGE_TITLE,
    
    //UI LABELS
+   
    
    //ERROR HANDLING
    ERROR_DATA_FILE_LOADING,

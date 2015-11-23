@@ -11,6 +11,7 @@ import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_PAGE_EDITOR;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_REMOVE_PAGE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_AS;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_PORTFOLIO;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_BANNER_IMAGE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SITE_VIEWER;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR_BUTTON;
@@ -20,6 +21,7 @@ import static ePortfolioMaker.StartupConstants.CSS_CLASS_SITE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_MODE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_MODE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_TOOLBAR;
+import static ePortfolioMaker.StartupConstants.DEFAULT_STUDENT_NAME;
 import static ePortfolioMaker.StartupConstants.ICON_ADD_NEW_PAGE;
 import static ePortfolioMaker.StartupConstants.ICON_EXIT_PROGRAM;
 import static ePortfolioMaker.StartupConstants.ICON_EXPORT_EPORTFOLIO;
@@ -29,6 +31,7 @@ import static ePortfolioMaker.StartupConstants.ICON_PAGE_EDITOR;
 import static ePortfolioMaker.StartupConstants.ICON_REMOVE_PAGE;
 import static ePortfolioMaker.StartupConstants.ICON_SAVEAS;
 import static ePortfolioMaker.StartupConstants.ICON_SAVE_EPORTFOLIO;
+import static ePortfolioMaker.StartupConstants.ICON_SELECT_BANNER_IMAGE;
 import static ePortfolioMaker.StartupConstants.ICON_SITE_VIEWER;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
@@ -39,11 +42,14 @@ import javafx.scene.control.Button;
 import java.awt.ScrollPane;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -72,18 +78,31 @@ Scene primaryScene;
 BorderPane pmPane;
 
 FlowPane fileToolbarPane;
-Button newPortfolioButton, loadPortfolioButton, exitButton, savePortfolioButton, saveAsButton, exportButton;
+Button newPortfolioButton, loadPortfolioButton, exitButton, savePortfolioButton,
+        saveAsButton, exportButton;
 HBox WorkspaceModeToolbar;
 
 Button selectPageEditorWorkspace;
 Button selectSiteViewerWorkspace;
 
-HBox Workspace;
 VBox siteToolbarPane;
 HBox sPane;
 Button addPageButton, removePageButton, selectPageButton;
 ScrollPane PageTitles;
-VBox pageEditorWorkspace;
+BorderPane pageEditorWorkspace;
+
+FlowPane studentNameImage;
+TextField nameField;
+Button addBannerImage;
+   
+VBox pageRepresentation;
+Label nameLabel;
+Image bannerImage;
+   
+GridPane PageButtonsPane;
+Button setLayout, setColor, addFooter, editFooter, addTextComp, editTextComp,
+   addImageComp, editImageComp, addVideoComp, editVideoComp, addSlideShowComp, 
+   editSlideShowComp, addHyperlinkComp, editHyperlinkComp, removeComp;
 
 ePortfolioFileManager fileManager;
 
@@ -107,11 +126,10 @@ public void startUI(Stage initPrimaryStage, String windowTitle){
     initFileToolbar();
     initWorkspaceModeToolbar();
     initSiteToolbarPane();
-    initPageEditorWorkspace();
-    initWorkspace();
-        initEventHandlers();
+    initEventHandlers();
     primaryStage = initPrimaryStage;
     initWindow(windowTitle);
+    initPageEditorWorkspace();
     
 }
 
@@ -149,16 +167,33 @@ public void initSiteToolbarPane() {
 }
 
 public void initPageEditorWorkspace(){
-    pageEditorWorkspace = new VBox();
-    pageEditorWorkspace.getStyleClass().add(CSS_CLASS_PAGE_EDITOR_WORKSPACE);
+    pageEditorWorkspace = new BorderPane();
+    pageEditorWorkspace.setPrefSize((primaryStage.getWidth()-siteToolbarPane.getWidth()), (primaryStage.getHeight()-fileToolbarPane.getHeight()));
+    initStudentNameImagePane();
+    pageEditorWorkspace.setTop(studentNameImage);
+    
 }
+
+public void initStudentNameImagePane() {
+    studentNameImage = new FlowPane();
+    studentNameImage.getStyleClass().add(CSS_CLASS_FILE_TOOLBAR);
+    nameField = new TextField();
+    nameField.setText(DEFAULT_STUDENT_NAME);
+    studentNameImage.getChildren().add(nameField);
         
-
-public void initWorkspace(){
-    // FIRST THE WORKSPACE ITSELF, WHICH WILL CONTAIN TWO REGIONS
-              
+    addBannerImage = initChildButton(studentNameImage, 
+    ICON_SELECT_BANNER_IMAGE, TOOLTIP_SELECT_BANNER_IMAGE, 
+        CSS_CLASS_FILE_TOOLBAR_BUTTON, false);   
+    studentNameImage.getChildren().add(addBannerImage);
 }
 
+public void initPageRepresentation() {
+        
+}
+    
+public void initPageButtonsPane () {
+        
+}
 public void initEventHandlers(){
   fileController = new FileController(this);  
   newPortfolioButton.setOnAction(e -> {
@@ -196,11 +231,8 @@ public void initWindow(String windowTitle){
     siteToolbarPane.setPrefSize(100, (primaryStage.getHeight()-fileToolbarPane.getHeight()));
     siteToolbarPane.getStyleClass().add(CSS_CLASS_SITE_TOOLBAR);
     
-    pageEditorWorkspace.setPrefSize((primaryStage.getWidth()-siteToolbarPane.getWidth()), (primaryStage.getHeight()-fileToolbarPane.getHeight()));
-
     pmPane.setTop(fileToolbarPane);
     pmPane.setLeft(siteToolbarPane);
-    pmPane.setCenter(pageEditorWorkspace);
     primaryScene = new Scene(pmPane);
     
     // NOW TIE THE SCENE TO THE WINDOW, SELECT THE STYLESHEET
@@ -226,7 +258,15 @@ public Button initChildButton(Pane toolbar, String iconFileName, LanguagePropert
 }
 
 public void updateToolbarControls(boolean saved){
+    //ADD PAGE EDITOR WORKSPACE
+    pmPane.setCenter(pageEditorWorkspace);
+    
+    //ENABLE BUTTONS
     addPageButton.setDisable(false);
+    selectSiteViewerWorkspace.setDisable(false);
+    
+    savePortfolioButton.setDisable(saved);
+    saveAsButton.setDisable(saved);
 }
 
 public void reloadFileSiteControls() {
