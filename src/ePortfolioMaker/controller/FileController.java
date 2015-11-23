@@ -8,6 +8,7 @@ package ePortfolioMaker.controller;
 import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.error.ErrorHandler;
 import ePortfolioMaker.view.SiteViewer;
+import ePortfolioMaker.view.TextDialogView;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import java.io.IOException;
 
@@ -52,7 +53,8 @@ public class FileController {
     }
     
     public void handleAddTextComponentRequest() {
-    
+      TextDialogView textDialog = new TextDialogView(ui);
+      textDialog.showDialog();
     }
             
    }

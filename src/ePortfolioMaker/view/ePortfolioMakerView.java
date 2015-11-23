@@ -152,10 +152,11 @@ public void startUI(Stage initPrimaryStage, String windowTitle){
     initFileToolbar();
     initWorkspaceModeToolbar();
     initSiteToolbarPane();
-    initEventHandlers();
     primaryStage = initPrimaryStage;
     initWindow(windowTitle);
     initPageEditorWorkspace();
+    initEventHandlers();
+
     
 }
 
@@ -261,12 +262,20 @@ public void initEventHandlers(){
   newPortfolioButton.setOnAction(e -> {
   fileController.handleNewEPortfolioRequest();
   });
+  
+  //SITE VIEWER WORKSPACE
   selectSiteViewerWorkspace.setOnAction(e -> {
       fileController.handleSiteViewerWorkspaceRequest();
   });
   selectPageEditorWorkspace.setOnAction(e -> {
      fileController.handlePageEditorWorkspaceRequest();
   });
+  
+  //COMPONENTS
+  addTextCompButton.setOnAction(e -> {
+      fileController.handleAddTextComponentRequest();
+  });
+  
 }
 
 public void initWindow(String windowTitle){
