@@ -59,12 +59,12 @@ public class StartupConstants {
     
     public static String ICON_UPDATE_FOOTER = "Footer.png";
     
-    public static String ICON_ADD_TEXT_COMP;
-    public static String ICON_ADD_IMAGE_COMP;
-    public static String ICON_ADD_SLIDESHOW_COMP;
-    public static String ICON_ADD_VIDEO_COMP;
-    public static String ICON_ADD_HYPERLINK;
-    public static String ICON_REMOVE_COMP;
+    public static String ICON_ADD_TEXT_COMP = "AddTextComp.png";
+    public static String ICON_ADD_IMAGE_COMP = "AddImageComp.png";
+    public static String ICON_ADD_SLIDESHOW_COMP = "AddSlideShowComp.png";
+    public static String ICON_ADD_VIDEO_COMP = "AddVideoComp.png";
+    public static String ICON_ADD_HYPERLINK = "AddHyperlinkComp.png";
+    public static String ICON_REMOVE_COMP = "RemoveComp.png";
     
     public static String ICON_NAVIGATE_SITE;
     

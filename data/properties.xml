@@ -24,7 +24,7 @@
         <property name="TOOLTIP_ADD_NEW_PAGE"		value="Add New Web Page"></property>
         <property name="TOOLTIP_REMOVE_PAGE"		value="Remove Web Page"></property>
         <property name="TOOLTIP_SELECT_LAYOUT_TEMPLATE"	value="Select a Layout Template"></property>
-        <property name="TOOLTIP_SELECT_COLOR_TEMPLATE" value="Select a Color Tempalte"></property>
+        <property name="TOOLTIP_SELECT_COLOR_TEMPLATE" value="Select a Color Template"></property>
         <property name="TOOLTIP_SELECT_BANNER_IMAGE"	value = "Select a Banner Image"></property>
         
         <property name="TOOLTIP_SELECT_COMP_FONT"		value="Select Font for Selected Component"></property>

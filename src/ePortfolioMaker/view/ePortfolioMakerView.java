@@ -2,12 +2,18 @@ package ePortfolioMaker.view;
 
 
 import ePortfolioMaker.LanguagePropertyType;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_HYPERLINK;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_IMAGE_COMP;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_NEW_PAGE;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_SLIDESHOW_COMP;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_TEXT_COMP;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_VIDEO_COMP;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_EXIT;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_EXPORT;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_LOAD_PORTFOLIO;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_NEW_PORTFOLIO;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_PAGE_EDITOR;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_REMOVE_COMP;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_REMOVE_PAGE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_AS;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_PORTFOLIO;
@@ -27,12 +33,18 @@ import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_MODE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_MODE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.DEFAULT_STUDENT_NAME;
+import static ePortfolioMaker.StartupConstants.ICON_ADD_HYPERLINK;
+import static ePortfolioMaker.StartupConstants.ICON_ADD_IMAGE_COMP;
 import static ePortfolioMaker.StartupConstants.ICON_ADD_NEW_PAGE;
+import static ePortfolioMaker.StartupConstants.ICON_ADD_SLIDESHOW_COMP;
+import static ePortfolioMaker.StartupConstants.ICON_ADD_TEXT_COMP;
+import static ePortfolioMaker.StartupConstants.ICON_ADD_VIDEO_COMP;
 import static ePortfolioMaker.StartupConstants.ICON_EXIT_PROGRAM;
 import static ePortfolioMaker.StartupConstants.ICON_EXPORT_EPORTFOLIO;
 import static ePortfolioMaker.StartupConstants.ICON_LOAD_EPORTFOLIO;
 import static ePortfolioMaker.StartupConstants.ICON_NEW_EPORTFOLIO;
 import static ePortfolioMaker.StartupConstants.ICON_PAGE_EDITOR;
+import static ePortfolioMaker.StartupConstants.ICON_REMOVE_COMP;
 import static ePortfolioMaker.StartupConstants.ICON_REMOVE_PAGE;
 import static ePortfolioMaker.StartupConstants.ICON_SAVEAS;
 import static ePortfolioMaker.StartupConstants.ICON_SAVE_EPORTFOLIO;
@@ -110,9 +122,9 @@ Label nameLabel;
 Image bannerImage;
    
 GridPane pageButtonsPane;
-Button setLayoutButton, setColorButton, addFooterButton, editFooter, addTextComp, editTextComp,
-   addImageComp, editImageComp, addVideoComp, editVideoComp, addSlideShowComp, 
-   editSlideShowComp, addHyperlinkComp, editHyperlinkComp, removeComp;
+Button setLayoutButton, setColorButton, addFooterButton, addTextCompButton, editTextComp,
+   addImageCompButton, editImageComp, addVideoCompButton, editVideoComp, addSlideShowCompButton, 
+   editSlideShowComp, addHyperlinkCompButton, editHyperlinkComp, removeCompButton;
 
  ePortfolioModel ePortfolio;
 
@@ -178,6 +190,8 @@ public void initSiteToolbarPane() {
     removePageButton = initChildButton(sPane, ICON_REMOVE_PAGE, TOOLTIP_REMOVE_PAGE, CSS_CLASS_SITE_TOOLBAR_BUTTON, true);   
 
     siteToolbarPane.getChildren().add(sPane);
+    
+    testSiteToolbarPane();
 }
 
 public void initPageEditorWorkspace(){
@@ -218,16 +232,40 @@ public void initPageButtonsPane () {
     pageButtonsPane = new GridPane();  
     setLayoutButton = initChildButton(ICON_SELECT_LAYOUT_TEMPLATE, TOOLTIP_SELECT_LAYOUT_TEMPLATE, CSS_CLASS_FILE_TOOLBAR, false);
     setColorButton = initChildButton(ICON_SELECT_COLOR_TEMPLATE, TOOLTIP_SELECT_COLOR_TEMPLATE, CSS_CLASS_FILE_TOOLBAR, false);
-    addFooterButton = initChildButton(ICON_UPDATE_FOOTER, TOOLTIP_UPDATE_FOOTER, CSS_CLASS_FILE_TOOLBAR, false);    
+    addFooterButton = initChildButton(ICON_UPDATE_FOOTER, TOOLTIP_UPDATE_FOOTER, CSS_CLASS_FILE_TOOLBAR, false);
+    
+    addTextCompButton = initChildButton(ICON_ADD_TEXT_COMP, TOOLTIP_ADD_TEXT_COMP, CSS_CLASS_FILE_TOOLBAR, false);
+    addImageCompButton = initChildButton(ICON_ADD_IMAGE_COMP, TOOLTIP_ADD_IMAGE_COMP, CSS_CLASS_FILE_TOOLBAR, false);
+    addVideoCompButton = initChildButton(ICON_ADD_VIDEO_COMP, TOOLTIP_ADD_VIDEO_COMP, CSS_CLASS_FILE_TOOLBAR, false);
+    
+    addSlideShowCompButton = initChildButton(ICON_ADD_SLIDESHOW_COMP, TOOLTIP_ADD_SLIDESHOW_COMP, CSS_CLASS_FILE_TOOLBAR, false);
+    addHyperlinkCompButton = initChildButton(ICON_ADD_HYPERLINK, TOOLTIP_ADD_HYPERLINK, CSS_CLASS_FILE_TOOLBAR, false);
+    removeCompButton = initChildButton(ICON_REMOVE_COMP,TOOLTIP_REMOVE_COMP, CSS_CLASS_FILE_TOOLBAR, false);
+
     pageButtonsPane.add(setLayoutButton,0,0);
-    pageButtonsPane.add(setColorButton, 1,0);
-    pageButtonsPane.add(addFooterButton, 2,0);
+    pageButtonsPane.add(setColorButton,1,0);
+    pageButtonsPane.add(addFooterButton,2,0);
+    
+    pageButtonsPane.add(addTextCompButton,0,1);
+    pageButtonsPane.add(addImageCompButton,1,1);
+    pageButtonsPane.add(addVideoCompButton,2,1);
+    
+    pageButtonsPane.add(addSlideShowCompButton,0,2);
+    pageButtonsPane.add(addHyperlinkCompButton,1,2);
+    pageButtonsPane.add(removeCompButton,2,2);
     
 }
 public void initEventHandlers(){
   fileController = new FileController(this);  
+  
   newPortfolioButton.setOnAction(e -> {
   fileController.handleNewEPortfolioRequest();
+  });
+  selectSiteViewerWorkspace.setOnAction(e -> {
+      fileController.handleSiteViewerWorkspaceRequest();
+  });
+  selectPageEditorWorkspace.setOnAction(e -> {
+     fileController.handlePageEditorWorkspaceRequest();
   });
 }
 
@@ -307,6 +345,7 @@ public void updateToolbarControls(boolean saved){
     //ENABLE BUTTONS
     addPageButton.setDisable(false);
     selectSiteViewerWorkspace.setDisable(false);
+    selectPageEditorWorkspace.setDisable(true);
     
     savePortfolioButton.setDisable(saved);
     saveAsButton.setDisable(saved);
@@ -319,6 +358,29 @@ public void reloadFileSiteControls() {
 public void reloadPortfolioPages()
 {
     
+}
+
+public void siteViewer(VBox siteViewer) {
+    pmPane.setCenter(siteViewer);
+    selectPageEditorWorkspace.setDisable(false);
+    selectSiteViewerWorkspace.setDisable(true);
+    addPageButton.setDisable(true);
+    removePageButton.setDisable(true);
+}
+
+public void testSiteToolbarPane() {
+    Button dummy1 = new Button("Page 1");
+    Button dummy2 = new Button("Page 2");
+    Button dummy3 = new Button("Page 3");
+    Button dummy4 = new Button("Page 4");
+    Button dummy5 = new Button("Page 5");
+    
+    siteToolbarPane.getChildren().add(dummy1);
+    siteToolbarPane.getChildren().add(dummy2);
+    siteToolbarPane.getChildren().add(dummy3);
+    siteToolbarPane.getChildren().add(dummy4);
+    siteToolbarPane.getChildren().add(dummy5);
+
 }
 
 }

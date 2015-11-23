@@ -7,6 +7,7 @@ package ePortfolioMaker.controller;
 
 import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.view.SiteViewer;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import java.io.IOException;
 
@@ -39,6 +40,19 @@ public class FileController {
     
     public void handleNewPageReqest()   {
         
+    }
+    
+    public void handleSiteViewerWorkspaceRequest() {
+        SiteViewer siteViewer = new SiteViewer(ui);
+        ui.siteViewer(siteViewer.getSiteViewer());
+    }
+    
+    public void handlePageEditorWorkspaceRequest() {
+        ui.updateToolbarControls(saved);
+    }
+    
+    public void handleAddTextComponentRequest() {
+    
     }
             
    }
