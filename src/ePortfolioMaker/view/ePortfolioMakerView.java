@@ -12,12 +12,17 @@ import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_REMOVE_PAGE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_AS;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_PORTFOLIO;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_BANNER_IMAGE;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_COLOR_TEMPLATE;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_LAYOUT_TEMPLATE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SITE_VIEWER;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_UPDATE_FOOTER;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_PAGE_EDITOR_WORKSPACE;
+import static ePortfolioMaker.StartupConstants.CSS_CLASS_PAGE_REPRESENTATION;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_SITE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_SITE_TOOLBAR_BUTTON;
+import static ePortfolioMaker.StartupConstants.CSS_CLASS_STUDENT_NAME_LABEL;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_MODE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_MODE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_WORKSPACE_TOOLBAR;
@@ -32,14 +37,17 @@ import static ePortfolioMaker.StartupConstants.ICON_REMOVE_PAGE;
 import static ePortfolioMaker.StartupConstants.ICON_SAVEAS;
 import static ePortfolioMaker.StartupConstants.ICON_SAVE_EPORTFOLIO;
 import static ePortfolioMaker.StartupConstants.ICON_SELECT_BANNER_IMAGE;
+import static ePortfolioMaker.StartupConstants.ICON_SELECT_COLOR_TEMPLATE;
+import static ePortfolioMaker.StartupConstants.ICON_SELECT_LAYOUT_TEMPLATE;
 import static ePortfolioMaker.StartupConstants.ICON_SITE_VIEWER;
+import static ePortfolioMaker.StartupConstants.ICON_UPDATE_FOOTER;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
 import ePortfolioMaker.controller.FileController;
 import ePortfolioMaker.error.ErrorHandler;
 import ePortfolioMaker.file.ePortfolioFileManager;
+import ePortfolioMaker.model.ePortfolioModel;
 import javafx.scene.control.Button;
-import java.awt.ScrollPane;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -53,6 +61,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -96,13 +105,16 @@ TextField nameField;
 Button addBannerImage;
    
 VBox pageRepresentation;
+ScrollPane pageComponents;
 Label nameLabel;
 Image bannerImage;
    
-GridPane PageButtonsPane;
-Button setLayout, setColor, addFooter, editFooter, addTextComp, editTextComp,
+GridPane pageButtonsPane;
+Button setLayoutButton, setColorButton, addFooterButton, editFooter, addTextComp, editTextComp,
    addImageComp, editImageComp, addVideoComp, editVideoComp, addSlideShowComp, 
    editSlideShowComp, addHyperlinkComp, editHyperlinkComp, removeComp;
+
+ ePortfolioModel ePortfolio;
 
 ePortfolioFileManager fileManager;
 
@@ -116,6 +128,8 @@ public ePortfolioMakerView(ePortfolioFileManager initFileManager) {
     
     // WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
     errorHandler = new ErrorHandler(this);
+    
+    ePortfolio = new ePortfolioModel(this);
 }
 
 public ErrorHandler getErrorHandler() {
@@ -168,9 +182,14 @@ public void initSiteToolbarPane() {
 
 public void initPageEditorWorkspace(){
     pageEditorWorkspace = new BorderPane();
+   // pageEditorWorkspace.getStyleClass().add(CSS_CLASS_PAGE_EDITOR_WORKSPACE);
     pageEditorWorkspace.setPrefSize((primaryStage.getWidth()-siteToolbarPane.getWidth()), (primaryStage.getHeight()-fileToolbarPane.getHeight()));
     initStudentNameImagePane();
+    initPageRepresentation();
+    initPageButtonsPane();
     pageEditorWorkspace.setTop(studentNameImage);
+    pageEditorWorkspace.setCenter(pageComponents);
+    pageEditorWorkspace.setRight(pageButtonsPane);
     
 }
 
@@ -184,15 +203,26 @@ public void initStudentNameImagePane() {
     addBannerImage = initChildButton(studentNameImage, 
     ICON_SELECT_BANNER_IMAGE, TOOLTIP_SELECT_BANNER_IMAGE, 
         CSS_CLASS_FILE_TOOLBAR_BUTTON, false);   
-    studentNameImage.getChildren().add(addBannerImage);
 }
 
 public void initPageRepresentation() {
-        
+  pageRepresentation = new VBox(); 
+  pageComponents = new ScrollPane(pageRepresentation);
+  pageRepresentation.getStyleClass().add(CSS_CLASS_PAGE_REPRESENTATION);
+  nameLabel = new Label(ePortfolio.getTitle());
+  nameLabel.getStyleClass().add(CSS_CLASS_STUDENT_NAME_LABEL);
+  pageRepresentation.getChildren().add(nameLabel);
 }
     
 public void initPageButtonsPane () {
-        
+    pageButtonsPane = new GridPane();  
+    setLayoutButton = initChildButton(ICON_SELECT_LAYOUT_TEMPLATE, TOOLTIP_SELECT_LAYOUT_TEMPLATE, CSS_CLASS_FILE_TOOLBAR, false);
+    setColorButton = initChildButton(ICON_SELECT_COLOR_TEMPLATE, TOOLTIP_SELECT_COLOR_TEMPLATE, CSS_CLASS_FILE_TOOLBAR, false);
+    addFooterButton = initChildButton(ICON_UPDATE_FOOTER, TOOLTIP_UPDATE_FOOTER, CSS_CLASS_FILE_TOOLBAR, false);    
+    pageButtonsPane.add(setLayoutButton,0,0);
+    pageButtonsPane.add(setColorButton, 1,0);
+    pageButtonsPane.add(addFooterButton, 2,0);
+    
 }
 public void initEventHandlers(){
   fileController = new FileController(this);  
@@ -241,6 +271,19 @@ public void initWindow(String windowTitle){
 	primaryStage.setScene(primaryScene);
 	primaryStage.show();
     
+}
+
+public Button initChildButton(String iconFileName, LanguagePropertyType tooltip, String cssClass, boolean disabled) {
+    PropertiesManager props = PropertiesManager.getPropertiesManager();
+    String imagePath = "file:" + PATH_ICONS + iconFileName;
+    Image buttonImage = new Image(imagePath);
+    Button button = new Button();
+    button.getStyleClass().add(cssClass);
+    button.setDisable(disabled);
+    button.setGraphic(new ImageView(buttonImage));
+    Tooltip buttonTooltip = new Tooltip(props.getProperty(tooltip.toString()));
+    button.setTooltip(buttonTooltip);
+    return button;
 }
 
 public Button initChildButton(Pane toolbar, String iconFileName, LanguagePropertyType tooltip, String cssClass, boolean disabled) {

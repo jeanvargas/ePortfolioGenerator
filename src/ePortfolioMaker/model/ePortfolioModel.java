@@ -7,6 +7,7 @@ package ePortfolioMaker.model;
 
 import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.view.ePortfolioMakerView;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import properties_manager.PropertiesManager;
 
@@ -19,6 +20,12 @@ public class ePortfolioModel {
     String title;
     ObservableList<Page> pages;
     Page selectedPage;
+    
+    public ePortfolioModel(ePortfolioMakerView initUI) {
+        ui = initUI;
+        pages = FXCollections.observableArrayList();
+        title = "Student Name";
+    }
     
     public boolean isPageSelected() {
         return selectedPage != null;

@@ -48,16 +48,16 @@ public class StartupConstants {
     
     public static String ICON_ADD_NEW_PAGE = "AddPage.png";
     public static String ICON_REMOVE_PAGE = "RemovePage.png";
-    
+        
     // WORKSPACE GUI ICONS
  
-    public static String ICON_SELECT_LAYOUT_TEMPLATE;
-    public static String ICON_SELECT_COLOR_TEMPLATE;
+    public static String ICON_SELECT_LAYOUT_TEMPLATE = "Layout.png";
+    public static String ICON_SELECT_COLOR_TEMPLATE = "Color.png";
     public static String ICON_SELECT_BANNER_IMAGE = "addBannerImage.png";
     
     public static String ICON_SELECT_COMP_FONT;
     
-    public static String ICON_UPDATE_FOOTER;
+    public static String ICON_UPDATE_FOOTER = "Footer.png";
     
     public static String ICON_ADD_TEXT_COMP;
     public static String ICON_ADD_IMAGE_COMP;
@@ -87,6 +87,8 @@ public class StartupConstants {
   public static String    CSS_CLASS_SITE_TOOLBAR = "site_toolbar";
   public static String    CSS_CLASS_SITE_TOOLBAR_BUTTON = "site_toolbar_button";
   public static String    CSS_CLASS_PAGE_EDITOR_WORKSPACE = "page_editor_workspace";
+  public static String    CSS_CLASS_PAGE_REPRESENTATION = "page_representation";
+  public static String    CSS_CLASS_STUDENT_NAME_LABEL = "student_name_label";
   //  public static String    CSS_CLASS_SLIDE_SHOW_EDIT_VBOX = "slide_show_edit_vbox";
   //  public static String    CSS_CLASS_SLIDE_EDIT_VIEW = "slide_edit_view";
   //  public static String    CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW = "selected_slide_edit_view";

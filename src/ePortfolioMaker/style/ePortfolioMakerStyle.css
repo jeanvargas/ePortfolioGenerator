@@ -74,6 +74,16 @@
   -fx-background-color: rgb(170, 170, 170);  
 }
 
+.page_representation {
+    -fx-alignment: CENTER;
+    //-fx-background-color: rgb(70, 70, 70);
+}
+
+.student_name_label {
+   -fx-font-family: 'Montserrat', sans-serif; 
+   -fx-font-size: 20px;  
+}
+
 .language_dialog {
     -fx-font-family: 'Montserrat', sans-serif; 
     -fx-font-size: 20px;
@@ -83,12 +93,4 @@
     -fx-effect: dropshadow(gaussian, rgb(162,162,162), 10, 0, 0, 15);
     -fx-border-radius: 25px;
     
-}
-
-.language_background {
-    -fx-background-radius: 10.0;
-    -fx-background-color: rgb(250, 229, 146);//yellow
-    -fx-border-color: rgb(70, 5, 5);
-    -fx-border-thickness: 10px;
-    -fx-spacing: 60px;
 }

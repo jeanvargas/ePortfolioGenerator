@@ -55,7 +55,6 @@
 	<property name="TOOLTIP_NEXT_SLIDE"	    value="Next Slide"></property>-->
 	
 	<!-- DEFAULT VALUES -->
-	<property name="DEFAULT_PORTFOLIO_TITLE"	value="ENTER EPORTFOLIO TITLE"></property>
 	<property name="DEFAULT_STUDENT_NAME"		value="ENTER STUDENT NAME"></property>
 	<property name="DEFAULT_PAGE_TITLE"			value="ENTER PAGE TITLE"></property>
 		
