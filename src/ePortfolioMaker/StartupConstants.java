@@ -65,6 +65,13 @@ public class StartupConstants {
     public static String ICON_ADD_VIDEO_COMP = "AddVideoComp.png";
     public static String ICON_ADD_HYPERLINK = "AddHyperlinkComp.png";
     public static String ICON_REMOVE_COMP = "RemoveComp.png";
+    public static String ICON_CHOOSE_FONT_LARGE = "CompFontLarge.png";
+    
+    public static String ICON_CHOOSE_FONT_SMALL = "CompFontSmall.png";
+    public static String ICON_TEXT_COMP_PARAGRAPH = "TextParagraph.png";
+    public static String ICON_TEXT_COMP_HEADER = "TextHeader.png";
+    public static String ICON_TEXT_COMP_LIST = "TextList.png";
+    public static String ICON_TEXT_ADD_LIST_ITEM = "AddListElement.png";
     
     public static String ICON_NAVIGATE_SITE;
     
@@ -89,6 +96,7 @@ public class StartupConstants {
   public static String    CSS_CLASS_PAGE_EDITOR_WORKSPACE = "page_editor_workspace";
   public static String    CSS_CLASS_PAGE_REPRESENTATION = "page_representation";
   public static String    CSS_CLASS_STUDENT_NAME_LABEL = "student_name_label";
+  public static String    CSS_CLASS_TEXT_COMP = "text_component";
   //  public static String    CSS_CLASS_SLIDE_SHOW_EDIT_VBOX = "slide_show_edit_vbox";
   //  public static String    CSS_CLASS_SLIDE_EDIT_VIEW = "slide_edit_view";
   //  public static String    CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW = "selected_slide_edit_view";
