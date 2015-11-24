@@ -14,10 +14,10 @@ public class StartupConstants {
     public static String UI_PROPERTIES_FILE_NAME = "properties.xml";
     public static String PROPERTIES_SCHEMA_FILE_NAME = "properties_schema.xsd";
     public static String PATH_DATA = "./data/";
-   // public static String PATH_SLIDE_SHOWS = PATH_DATA + "slide_shows/";
+   public static String PATH_SLIDE_SHOWS = PATH_DATA + "slide_shows/";
    public static String PATH_IMAGES = "./images/";
    public static String PATH_ICONS = PATH_IMAGES + "icons/";
-   // public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
+   public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
     public static String PATH_CSS = "/ePortfolioMaker/style/";
     public static String STYLE_SHEET_UI = PATH_CSS + "ePortfolioMakerStyle.css";
     public static String PATH_SITES = "./src/ePortfolioMaker/sites/";
@@ -73,6 +73,11 @@ public class StartupConstants {
     public static String ICON_TEXT_COMP_LIST = "TextList.png";
     public static String ICON_TEXT_ADD_LIST_ITEM = "AddListElement.png";
     
+    public static String ICON_ADD_SLIDE = "Add.png";
+    public static String ICON_REMOVE_SLIDE = "Remove.png";
+    public static String ICON_MOVE_UP = "MoveUp.png";
+    public static String ICON_MOVE_DOWN = "MoveDown.png";
+    
     public static String ICON_NAVIGATE_SITE;
     
    // public static String ICON_WINDOW_LOGO = "Logo.png";
@@ -80,12 +85,12 @@ public class StartupConstants {
 
 
     // UI SETTINGS
-   // public static String    DEFAULT_SLIDE_IMAGE = "DefaultStartSlide.png";
-   // public static int	    DEFAULT_THUMBNAIL_WIDTH = 200;
-   // public static int	    DEFAULT_SLIDE_SHOW_HEIGHT = 500;
+   public static String    DEFAULT_SLIDE_IMAGE = "DefaultStartSlide.png";
+   public static int	    DEFAULT_THUMBNAIL_WIDTH = 200;
+   public static int	    DEFAULT_SLIDE_SHOW_HEIGHT = 500;
     
     // CSS STYLE SHEET CLASSES
-  //  public static String    CSS_CLASS_VERTICAL_TOOLBAR_BUTTON = "vertical_toolbar_button";
+  public static String    CSS_CLASS_VERTICAL_TOOLBAR_BUTTON = "vertical_toolbar_button";
   public static String    CSS_CLASS_FILE_TOOLBAR = "file_toolbar";
   public static String    CSS_CLASS_FILE_TOOLBAR_BUTTON = "file_toolbar_button";
   public static String    CSS_CLASS_WORKSPACE_MODE_TOOLBAR = "workspace_mode_toolbar";
@@ -97,11 +102,11 @@ public class StartupConstants {
   public static String    CSS_CLASS_PAGE_REPRESENTATION = "page_representation";
   public static String    CSS_CLASS_STUDENT_NAME_LABEL = "student_name_label";
   public static String    CSS_CLASS_TEXT_COMP = "text_component";
-  //  public static String    CSS_CLASS_SLIDE_SHOW_EDIT_VBOX = "slide_show_edit_vbox";
-  //  public static String    CSS_CLASS_SLIDE_EDIT_VIEW = "slide_edit_view";
-  //  public static String    CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW = "selected_slide_edit_view";
-  //  public static String    LANGUAGE_DIALOG = "language_dialog";
-  //  public static String    LANGUAGE_BACKGROUND = "language_background";
+  public static String    CSS_CLASS_SLIDE_SHOW_EDIT_VBOX = "slide_show_edit_vbox";
+  public static String    CSS_CLASS_SLIDE_EDIT_VIEW = "slide_edit_view";
+  public static String    CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW = "selected_slide_edit_view";
+  public static String    LANGUAGE_DIALOG = "language_dialog";
+  public static String    LANGUAGE_BACKGROUND = "language_background";
     
     // UI LABELS
     public static String LABEL_EPORTFOLIO_TITLE = "ePortfolio_title";
@@ -109,6 +114,7 @@ public class StartupConstants {
     
     public static String DEFAULT_STUDENT_NAME = "ENTER NAME";
     public static String DEFAULT_PAGE_TITLE = "ENTER TITLE";
+ 
     
    // public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
    // public static String    LABEL_LANGUAGE_SELECTION_PROMPT = "Select a Language:";

@@ -40,29 +40,34 @@
         <property name="TOOLTIP_ADD_HYPERLINK"			value="Add a Hyperlink"></property>
         <property name="TOOLTIP_REMOVE_COMP"			value="Remove Selected Component"></property>
         
+        <property name="TOOLTIP_ADD_PARAGRAPH"			value="Add a Paragraph"></property>
+        <property name="TOOLTIP_ADD_HEADER"				value="Add a Header"></property>
+        <property name="TOOLTIP_ADD_LIST"				value="Add a List"></property>
+        <property name="TOOLTIP_ADD_LIST_ELEMENT"		value="Add Element to List"></property>
+                
         <property name="TOOLTIP_NAVIGATE_SITE"			value="Navigate Web Site"></property>
                 
-       <!-- <property name="TOOLTIP_NEW_SLIDE_SHOW"	    value="Create a New Slide Show"></property>
+      <!-- <property name="TOOLTIP_NEW_SLIDE_SHOW"	    value="Create a New Slide Show"></property>
         <property name="TOOLTIP_LOAD_SLIDE_SHOW"    value="Load an Existing Slide Show"></property>
         <property name="TOOLTIP_SAVE_SLIDE_SHOW"    value="Save this Slide Show"></property>
         <property name="TOOLTIP_VIEW_SLIDE_SHOW"    value="View this Slide Show"></property>
-        <property name="TOOLTIP_EXIT"		    value="Exit the Application"></property>
+        <property name="TOOLTIP_EXIT"		    value="Exit the Application"></property>-->
 	<property name="TOOLTIP_ADD_SLIDE"	    value="Add Slide"></property>
 	<property name="TOOLTIP_REMOVE_SLIDE"	    value="Remove Slide"></property>
 	<property name="TOOLTIP_MOVE_UP"	    value="Move Slide Up"></property>
 	<property name="TOOLTIP_MOVE_DOWN"	    value="Move Slide Down"></property>
 	<property name="TOOLTIP_PREVIOUS_SLIDE"	    value="Previous Slide"></property>
-	<property name="TOOLTIP_NEXT_SLIDE"	    value="Next Slide"></property>-->
+	<property name="TOOLTIP_NEXT_SLIDE"	    value="Next Slide"></property>
 	
 	<!-- DEFAULT VALUES -->
 	<property name="DEFAULT_STUDENT_NAME"		value="ENTER STUDENT NAME"></property>
 	<property name="DEFAULT_PAGE_TITLE"			value="ENTER PAGE TITLE"></property>
 		
-	<!--<property name="DEFAULT_IMAGE_CAPTION"	    value="ENTER CAPTION"></property>
-	<property name="DEFAULT_SLIDE_SHOW_TITLE"   value="ENTER TITLE"></property>-->
+	<property name="DEFAULT_IMAGE_CAPTION"	    value="ENTER CAPTION"></property>
+	<property name="DEFAULT_SLIDE_SHOW_TITLE"   value="ENTER TITLE"></property>
 	
 	<!-- UI LABELS -->
-	<!--<property name="LABEL_CAPTION"		    value="Caption:"></property>-->
+	<property name="LABEL_CAPTION"		    value="Caption:"></property>
         
         <!-- GUI LABELS -->
       

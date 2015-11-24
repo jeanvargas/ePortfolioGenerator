@@ -84,6 +84,10 @@
    -fx-font-size: 20px;  
 }
 
+.text_component {
+    -fx-alignment: CENTER;
+}
+
 .language_dialog {
     -fx-font-family: 'Montserrat', sans-serif; 
     -fx-font-size: 20px;

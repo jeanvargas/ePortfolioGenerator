@@ -19,6 +19,7 @@ import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_AS;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SAVE_PORTFOLIO;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_BANNER_IMAGE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_COLOR_TEMPLATE;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_COMP_FONT;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_LAYOUT_TEMPLATE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SITE_VIEWER;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_UPDATE_FOOTER;
@@ -39,6 +40,7 @@ import static ePortfolioMaker.StartupConstants.ICON_ADD_NEW_PAGE;
 import static ePortfolioMaker.StartupConstants.ICON_ADD_SLIDESHOW_COMP;
 import static ePortfolioMaker.StartupConstants.ICON_ADD_TEXT_COMP;
 import static ePortfolioMaker.StartupConstants.ICON_ADD_VIDEO_COMP;
+import static ePortfolioMaker.StartupConstants.ICON_CHOOSE_FONT_LARGE;
 import static ePortfolioMaker.StartupConstants.ICON_EXIT_PROGRAM;
 import static ePortfolioMaker.StartupConstants.ICON_EXPORT_EPORTFOLIO;
 import static ePortfolioMaker.StartupConstants.ICON_LOAD_EPORTFOLIO;
@@ -124,7 +126,7 @@ Image bannerImage;
 GridPane pageButtonsPane;
 Button setLayoutButton, setColorButton, addFooterButton, addTextCompButton, editTextComp,
    addImageCompButton, editImageComp, addVideoCompButton, editVideoComp, addSlideShowCompButton, 
-   editSlideShowComp, addHyperlinkCompButton, editHyperlinkComp, removeCompButton;
+   editSlideShowComp, addHyperlinkCompButton, editHyperlinkComp, removeCompButton, chooseCompFontButton;
 
  ePortfolioModel ePortfolio;
 
@@ -243,6 +245,8 @@ public void initPageButtonsPane () {
     addHyperlinkCompButton = initChildButton(ICON_ADD_HYPERLINK, TOOLTIP_ADD_HYPERLINK, CSS_CLASS_FILE_TOOLBAR, false);
     removeCompButton = initChildButton(ICON_REMOVE_COMP,TOOLTIP_REMOVE_COMP, CSS_CLASS_FILE_TOOLBAR, false);
 
+    chooseCompFontButton = initChildButton(ICON_CHOOSE_FONT_LARGE,TOOLTIP_SELECT_COMP_FONT, CSS_CLASS_FILE_TOOLBAR, false);
+    
     pageButtonsPane.add(setLayoutButton,0,0);
     pageButtonsPane.add(setColorButton,1,0);
     pageButtonsPane.add(addFooterButton,2,0);
@@ -254,6 +258,8 @@ public void initPageButtonsPane () {
     pageButtonsPane.add(addSlideShowCompButton,0,2);
     pageButtonsPane.add(addHyperlinkCompButton,1,2);
     pageButtonsPane.add(removeCompButton,2,2);
+    
+    pageButtonsPane.add(chooseCompFontButton,0,3);
     
 }
 public void initEventHandlers(){
@@ -274,6 +280,12 @@ public void initEventHandlers(){
   //COMPONENTS
   addTextCompButton.setOnAction(e -> {
       fileController.handleAddTextComponentRequest();
+  });
+  chooseCompFontButton.setOnAction(e -> {
+      fileController.handleChooseCompFontRequest();
+  });
+  addSlideShowCompButton.setOnAction(e -> {
+      fileController.handleSlideshowRequest();
   });
   
 }

@@ -7,10 +7,13 @@ package ePortfolioMaker.controller;
 
 import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.view.FontDialogView;
 import ePortfolioMaker.view.SiteViewer;
+import ePortfolioMaker.view.SlideshowDialogView;
 import ePortfolioMaker.view.TextDialogView;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import java.io.IOException;
+import javafx.stage.Stage;
 
 /**
  *
@@ -55,6 +58,17 @@ public class FileController {
     public void handleAddTextComponentRequest() {
       TextDialogView textDialog = new TextDialogView(ui);
       textDialog.showDialog();
+    }
+    
+    public void handleChooseCompFontRequest() {
+        FontDialogView fontDialog = new FontDialogView(ui);
+        fontDialog.setUpDialog();
+    }
+    
+    public void handleSlideshowRequest() {
+        SlideshowDialogView slideShow = new SlideshowDialogView(ui);
+        Stage stage = new Stage();
+        slideShow.startUI(stage, "Slideshow");
     }
             
    }
