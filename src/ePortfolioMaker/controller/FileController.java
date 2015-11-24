@@ -7,7 +7,9 @@ package ePortfolioMaker.controller;
 
 import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.view.ColorThemeDialog;
 import ePortfolioMaker.view.FontDialogView;
+import ePortfolioMaker.view.LayoutDialogView;
 import ePortfolioMaker.view.SiteViewer;
 import ePortfolioMaker.view.SlideshowDialogView;
 import ePortfolioMaker.view.TextDialogView;
@@ -69,6 +71,16 @@ public class FileController {
         SlideshowDialogView slideShow = new SlideshowDialogView(ui);
         Stage stage = new Stage();
         slideShow.startUI(stage, "Slideshow");
+    }
+    
+    public void handleLayoutRequest() {
+       LayoutDialogView layout = new LayoutDialogView(ui);
+       layout.setUpDialog();
+    }
+    
+    public void handleColorRequest() {
+        ColorThemeDialog color = new ColorThemeDialog(ui);
+        color.setUpDialog();
     }
             
    }

@@ -278,6 +278,12 @@ public void initEventHandlers(){
   });
   
   //COMPONENTS
+  setLayoutButton.setOnAction(e -> {
+      fileController.handleLayoutRequest();
+  });
+  setColorButton.setOnAction(e -> {
+      fileController.handleColorRequest();
+  });
   addTextCompButton.setOnAction(e -> {
       fileController.handleAddTextComponentRequest();
   });

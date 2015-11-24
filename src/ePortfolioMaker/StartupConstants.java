@@ -105,6 +105,7 @@ public class StartupConstants {
   public static String    CSS_CLASS_SLIDE_SHOW_EDIT_VBOX = "slide_show_edit_vbox";
   public static String    CSS_CLASS_SLIDE_EDIT_VIEW = "slide_edit_view";
   public static String    CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW = "selected_slide_edit_view";
+  public static String    CSS_CLASS_COLOR_OPTION = "color_option";
   public static String    LANGUAGE_DIALOG = "language_dialog";
   public static String    LANGUAGE_BACKGROUND = "language_background";
     

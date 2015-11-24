@@ -31,7 +31,6 @@ public class FontDialogView {
     
     public FontDialogView(ePortfolioMakerView initUI) {
      ui = initUI;   
-     setUpDialog();
     }
     
     public void setUpDialog() {
