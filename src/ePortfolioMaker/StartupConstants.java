@@ -106,6 +106,7 @@ public class StartupConstants {
   public static String    CSS_CLASS_SLIDE_EDIT_VIEW = "slide_edit_view";
   public static String    CSS_CLASS_SELECTED_SLIDE_EDIT_VIEW = "selected_slide_edit_view";
   public static String    CSS_CLASS_COLOR_OPTION = "color_option";
+  public static String    CSS_CLASS_NAME_IMAGE_TOOLBAR = "name_image_toolbar";
   public static String    LANGUAGE_DIALOG = "language_dialog";
   public static String    LANGUAGE_BACKGROUND = "language_background";
     
@@ -114,7 +115,7 @@ public class StartupConstants {
     public static String LABEL_PAGE_TITLE = "page_title";
     
     public static String DEFAULT_STUDENT_NAME = "ENTER NAME";
-    public static String DEFAULT_PAGE_TITLE = "ENTER TITLE";
+    public static String DEFAULT_PAGE_TITLE = "ENTER PAGE TITLE";
  
     
    // public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
