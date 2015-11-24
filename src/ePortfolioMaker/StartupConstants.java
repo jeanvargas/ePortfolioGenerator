@@ -48,6 +48,7 @@ public class StartupConstants {
     
     public static String ICON_ADD_NEW_PAGE = "AddPage.png";
     public static String ICON_REMOVE_PAGE = "RemovePage.png";
+    public static String ICON_SELECT_PAGE = "SelectPage.png";
         
     // WORKSPACE GUI ICONS
  
@@ -66,12 +67,14 @@ public class StartupConstants {
     public static String ICON_ADD_HYPERLINK = "AddHyperlinkComp.png";
     public static String ICON_REMOVE_COMP = "RemoveComp.png";
     public static String ICON_CHOOSE_FONT_LARGE = "CompFontLarge.png";
+    public static String ICON_SELECT_COMP = "SelectComp.png";
     
     public static String ICON_CHOOSE_FONT_SMALL = "CompFontSmall.png";
     public static String ICON_TEXT_COMP_PARAGRAPH = "TextParagraph.png";
     public static String ICON_TEXT_COMP_HEADER = "TextHeader.png";
     public static String ICON_TEXT_COMP_LIST = "TextList.png";
     public static String ICON_TEXT_ADD_LIST_ITEM = "AddListElement.png";
+    public static String ICON_TEXT_REMOVE_LIST_ITEM = "RemoveListElement.png";
     
     public static String ICON_ADD_SLIDE = "Add.png";
     public static String ICON_REMOVE_SLIDE = "Remove.png";

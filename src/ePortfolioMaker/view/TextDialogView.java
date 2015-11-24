@@ -10,6 +10,7 @@ import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_HEADER;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_LIST;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_LIST_ELEMENT;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_PARAGRAPH;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_REMOVE_LIST_ELEMENT;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_COMP_FONT;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_PAGE_EDITOR_WORKSPACE;
@@ -19,6 +20,7 @@ import static ePortfolioMaker.StartupConstants.ICON_TEXT_ADD_LIST_ITEM;
 import static ePortfolioMaker.StartupConstants.ICON_TEXT_COMP_HEADER;
 import static ePortfolioMaker.StartupConstants.ICON_TEXT_COMP_LIST;
 import static ePortfolioMaker.StartupConstants.ICON_TEXT_COMP_PARAGRAPH;
+import static ePortfolioMaker.StartupConstants.ICON_TEXT_REMOVE_LIST_ITEM;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
 import ePortfolioMaker.controller.TextDialogController;
@@ -49,7 +51,7 @@ public class TextDialogView {
     Label enterTextLabel;
     VBox paragraphBox, headerBox, listBox;
     Button paragraphButton, headerButton, listButton, compFontButton, okParagraphButton, 
-            okHeaderButton, okListButton, addElementToListButton;
+            okHeaderButton, okListButton, addElementToListButton, removeListElemenButton;
     TextArea paragraphTextField;
     TextField headerTextField, listTextField;
     ePortfolioMakerView ui;
@@ -152,6 +154,15 @@ public class TextDialogView {
        ICON_TEXT_COMP_PARAGRAPH, false);
         
         listBox.getChildren().add(listElement);
+        
+        FlowPane sample = new FlowPane();
+        Label sampleListElement = new Label("Sample List Element");
+        sample.getChildren().add(sampleListElement);
+        removeListElemenButton = initChildButton(sample, 
+       ICON_TEXT_REMOVE_LIST_ITEM, TOOLTIP_REMOVE_LIST_ELEMENT, 
+       ICON_TEXT_COMP_PARAGRAPH, false);
+        listBox.getChildren().add(sample);
+        
         listBox.getChildren().add(okListButton);
         borderPane.setCenter(listBox);
         compFontButton.setDisable(false);

@@ -32,6 +32,7 @@
 .file_toolbar {
     -fx-border-color: rgb(200, 200, 200);
     -fx-border-thickness: 60px;
+    -fx-background-color: rgb(162,207,222);
 }
 
 .file_toolbar_button {
@@ -60,12 +61,19 @@
    -fx-alignment:TOP_CENTER;
    -fx-border-color: rgb(200, 200, 200);
    -fx-border-thickness: 60px;
+   -fx-background-color: rgb(162,207,222);
 }
 
 .site_toolbar_button {
     //-fx-background-color: rgb(250, 229, 146);
     //-fx-padding: 10px 10px 10px 10px;
     //-fx-spacing: 50px;
+}
+
+.name_image_toolbar {
+ -fx-spacing: 5px;
+ -fx-border-color: rgb(200, 200, 200);
+ -fx-border-thickness: 60px;
 }
 
 .page_editor_workspace {

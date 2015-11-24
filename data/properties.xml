@@ -26,6 +26,10 @@
         <property name="TOOLTIP_SELECT_LAYOUT_TEMPLATE"	value="Select a Layout Template"></property>
         <property name="TOOLTIP_SELECT_COLOR_TEMPLATE" value="Select a Color Template"></property>
         <property name="TOOLTIP_SELECT_BANNER_IMAGE"	value = "Select a Banner Image"></property>
+        <property name="TOOLTIP_SELECT_COMP"			value="Select Component"></property>
+		 <property name="TOOLTIP_SELECT_PAGE"			value="Select Page"></property>
+		  <property name="TOOLTIP_REMOVE_LIST_ELEMENT"			value="Remove This List Element"></property>
+
         
         <property name="TOOLTIP_SELECT_COMP_FONT"		value="Select Font for Selected Component"></property>
         

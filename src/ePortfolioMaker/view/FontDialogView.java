@@ -35,8 +35,8 @@ public class FontDialogView {
     
     public void setUpDialog() {
         stage = new Stage();
-        stage.setWidth(400);
-        stage.setHeight(300);
+        stage.setWidth(500);
+        stage.setHeight(200);
         
         optionPane = new FlowPane();
         vBox = new VBox();

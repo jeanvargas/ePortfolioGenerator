@@ -7,6 +7,10 @@ package ePortfolioMaker.controller;
 
 import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.view.AddBannerDialogView;
+import ePortfolioMaker.view.AddHyperlinkDialogView;
+import ePortfolioMaker.view.AddImageDialogView;
+import ePortfolioMaker.view.AddVideoDialogView;
 import ePortfolioMaker.view.ColorThemeDialog;
 import ePortfolioMaker.view.FontDialogView;
 import ePortfolioMaker.view.LayoutDialogView;
@@ -14,6 +18,7 @@ import ePortfolioMaker.view.SiteViewer;
 import ePortfolioMaker.view.SlideshowDialogView;
 import ePortfolioMaker.view.TextDialogView;
 import ePortfolioMaker.view.ePortfolioMakerView;
+import ePortfolioMaker.view.editFooterDialogView;
 import java.io.IOException;
 import javafx.stage.Stage;
 
@@ -81,6 +86,31 @@ public class FileController {
     public void handleColorRequest() {
         ColorThemeDialog color = new ColorThemeDialog(ui);
         color.setUpDialog();
+    }
+    
+    public void handleAddFooterRequest() {
+        editFooterDialogView edit = new editFooterDialogView(ui);
+        edit.setUpDialog();
+    }
+    
+    public void handleAddBannerRequest() {
+        AddBannerDialogView addImage = new AddBannerDialogView();
+        addImage.processSelectImage();
+    }
+    
+    public void handleAddImageRequest() {
+        AddImageDialogView image = new AddImageDialogView();
+        image.setUpDialog();
+    }
+    
+    public void addVideoRequest() {
+        AddVideoDialogView video = new AddVideoDialogView(ui);
+        video.setUpDialog();    
+    }
+    
+    public void addHyperlinkRequest() {
+        AddHyperlinkDialogView hyperlink = new AddHyperlinkDialogView(ui);
+        hyperlink.setUpDialog();
     }
             
    }
