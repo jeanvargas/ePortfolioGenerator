@@ -9,18 +9,20 @@ package ePortfolioMaker.model;
  *
  * @author Jeanmarie
  */
-public class Page {
-    String title;
+public class TextCompModel {
+    int id;
+    String text;
     
-    public Page(String initTitle) {
-        title = initTitle;
+    public TextCompModel(int initID, String initText) {
+        id = initID;
+        text = initText;
     }
     
-    public void setTitle(String t) {
-        title = t;
+    public int getID(){
+        return id;
     }
     
-    public String getTitle() {
-        return title;
+    public String getText() {
+        return text;
     }
 }

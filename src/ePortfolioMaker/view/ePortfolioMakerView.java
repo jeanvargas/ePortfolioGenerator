@@ -25,11 +25,13 @@ import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_LAYOUT_TEMPLAT
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_PAGE;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SITE_VIEWER;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_UPDATE_FOOTER;
+import static ePortfolioMaker.StartupConstants.CSS_CLASS_COMPONENT_EDIT_VIEW;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_NAME_IMAGE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_PAGE_EDITOR_WORKSPACE;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_PAGE_REPRESENTATION;
+import static ePortfolioMaker.StartupConstants.CSS_CLASS_SELECTED_COMPONENT_EDIT_VIEW;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_SITE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_SITE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_STUDENT_NAME_LABEL;
@@ -66,6 +68,8 @@ import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
 import ePortfolioMaker.controller.FileController;
 import ePortfolioMaker.error.ErrorHandler;
 import ePortfolioMaker.file.ePortfolioFileManager;
+import ePortfolioMaker.model.Component;
+import ePortfolioMaker.model.PageModel;
 import ePortfolioMaker.model.ePortfolioModel;
 import javafx.scene.control.Button;
 import javafx.geometry.Rectangle2D;
@@ -130,7 +134,8 @@ Button setLayoutButton, setColorButton, addFooterButton, addTextCompButton, edit
    addImageCompButton, editImageComp, addVideoCompButton, editVideoComp, addSlideShowCompButton, 
    editSlideShowComp, addHyperlinkCompButton, editHyperlinkComp, removeCompButton, selectCompButton, chooseCompFontButton;
 
- ePortfolioModel ePortfolio;
+ePortfolioModel ePortfolio;
+PageModel page;
 
 ePortfolioFileManager fileManager;
 
@@ -146,6 +151,7 @@ public ePortfolioMakerView(ePortfolioFileManager initFileManager) {
     errorHandler = new ErrorHandler(this);
     
     ePortfolio = new ePortfolioModel(this);
+    
 }
 // ACCESSOR METHODS
     public ePortfolioModel getEPortfolio() {
@@ -161,6 +167,10 @@ public ePortfolioMakerView(ePortfolioFileManager initFileManager) {
 public ErrorHandler getErrorHandler() {
 	return errorHandler;
     }
+
+public PageModel getPage() {
+    return ePortfolio.getSelectedPage();
+}
 
 public void startUI(Stage initPrimaryStage, String windowTitle){
     initFileToolbar();
@@ -424,6 +434,22 @@ public void reloadPortfolioPages()
     
 }
 
+public void reloadPage() {
+    pageRepresentation.getChildren().clear();
+    for(Component component: page.getComponents()) {
+        ComponentEditView compEdit = new ComponentEditView(component);
+        if(page.isSelectedComponent(component))
+            compEdit.getStyleClass().add(CSS_CLASS_COMPONENT_EDIT_VIEW);
+        else
+            compEdit.getStyleClass().add(CSS_CLASS_SELECTED_COMPONENT_EDIT_VIEW);   
+        pageRepresentation.getChildren().add(compEdit);
+        compEdit.setOnMousePressed(e -> {
+            page.setSelectedComponent(component);
+            reloadPage();
+        });
+    }
+}
+
 public void siteViewer(VBox siteViewer) {
     pmPane.setCenter(siteViewer);
     selectPageEditorWorkspace.setDisable(false);
@@ -448,6 +474,7 @@ public void testSiteToolbarPane() {
 }
 
 public void newPage() {
+    page = new PageModel(this);
     setLayoutButton.setDisable(false);
     setColorButton.setDisable(false);
     addFooterButton.setDisable(false);

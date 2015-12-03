@@ -23,6 +23,8 @@ import static ePortfolioMaker.StartupConstants.ICON_TEXT_COMP_PARAGRAPH;
 import static ePortfolioMaker.StartupConstants.ICON_TEXT_REMOVE_LIST_ITEM;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
+import static ePortfolioMaker.StartupConstants.TEXT;
+import ePortfolioMaker.controller.PageEditController;
 import ePortfolioMaker.controller.TextDialogController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -56,6 +58,7 @@ public class TextDialogView {
     TextField headerTextField, listTextField;
     ePortfolioMakerView ui;
     TextDialogController textDialogController;
+    PageEditController pageEditController;
     
     public TextDialogView(ePortfolioMakerView initUI) {
         ui = initUI;
@@ -126,6 +129,12 @@ public class TextDialogView {
         paragraphBox.getChildren().add(okParagraphButton);
         borderPane.setCenter(paragraphBox);
         compFontButton.setDisable(false);
+        
+        pageEditController = new PageEditController(ui);
+        okParagraphButton.setOnAction(e -> {
+           pageEditController.processAddComponentRequest(paragraphTextField.getText());
+           stage.close();
+        });
     }
     
     public void header() {

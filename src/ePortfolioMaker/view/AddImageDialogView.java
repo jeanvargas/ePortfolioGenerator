@@ -5,13 +5,18 @@
  */
 package ePortfolioMaker.view;
 
+import ePortfolioMaker.LanguagePropertyType;
 import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
+import ePortfolioMaker.controller.PageEditController;
+import ePortfolioMaker.error.ErrorHandler;
 import java.io.File;
+import java.net.URL;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -29,9 +34,11 @@ public class AddImageDialogView {
     Label widthLabel, heightLabel, captionLabel;
     TextField widthField, heightField, captionField;
     Button okButton;
+    PageEditController pageEditController;
+    ePortfolioMakerView ui;
     
-    public AddImageDialogView() {
- 
+    public AddImageDialogView(ePortfolioMakerView initUI) {
+        ui = initUI;
     }
     
     public void setUpDialog(){
@@ -74,6 +81,7 @@ public class AddImageDialogView {
     }
     
     public void processSelectImage() {
+        pageEditController = new PageEditController(ui);
 	FileChooser imageFileChooser = new FileChooser();
 	
 	// SET THE STARTING DIRECTORY
@@ -83,15 +91,23 @@ public class AddImageDialogView {
 	FileChooser.ExtensionFilter jpgFilter = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
 	FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
 	FileChooser.ExtensionFilter gifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.GIF");
-	imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter);
+        FileChooser.ExtensionFilter jpegFilter = new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.JPEG");
+
+	imageFileChooser.getExtensionFilters().addAll(jpgFilter, pngFilter, gifFilter, jpegFilter);
 	
-	// LET'S OPEN THE FILE CHOOSER
 	File file = imageFileChooser.showOpenDialog(null);
 	if (file != null) {
-	    String path = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
-	    String fileName = file.getName();
-	   // slideToEdit.setImage(path, fileName);
-	   // view.updateSlideImage();
+            try {
+                URL fileURL = file.toURI().toURL();
+                Image imageComponent = new Image(fileURL.toExternalForm());
+                pageEditController.processAddComponentRequest(imageComponent);
+                stage.close();
+                
+            } catch(Exception e) {
+                ErrorHandler eH = new ErrorHandler(null);
+                eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+                stage.close();
+            }
 	}
     }
 }

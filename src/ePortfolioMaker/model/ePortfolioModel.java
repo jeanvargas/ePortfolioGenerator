@@ -17,9 +17,9 @@ import properties_manager.PropertiesManager;
  */
 public class ePortfolioModel {
     ePortfolioMakerView ui;
-    String title;
-    ObservableList<Page> pages;
-    Page selectedPage;
+    String title; //name of ePortfolio
+    ObservableList<PageModel> pages;
+    PageModel selectedPage;
     
     public ePortfolioModel(ePortfolioMakerView initUI) {
         ui = initUI;
@@ -31,7 +31,7 @@ public class ePortfolioModel {
         return selectedPage != null;
     }
     
-    public Page getSelectedPage() {
+    public PageModel getSelectedPage() {
         return selectedPage;
     }
     
@@ -39,7 +39,7 @@ public class ePortfolioModel {
         return title;
     }
     
-    public void setSelectedPage(Page initSelectedPage) {
+    public void setSelectedPage(PageModel initSelectedPage) {
         selectedPage =  initSelectedPage;
     }
     
@@ -49,12 +49,12 @@ public class ePortfolioModel {
     
     public void clear() {
         pages.clear();
-        PropertiesManager props = PropertiesManager.getPropertiesManager();
+        //PropertiesManager props = PropertiesManager.getPropertiesManager();
         selectedPage = null;
     }
     
-    public void addPage(String pageTitle) {
-        Page pageToAdd = new Page(pageTitle);
+    public void addPage() {
+        PageModel pageToAdd = new PageModel(ui);
         pages.add(pageToAdd);
         ui.reloadPortfolioPages();
     }

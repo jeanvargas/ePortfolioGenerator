@@ -111,3 +111,20 @@
     -fx-border-radius: 25px;
     
 }
+
+.component_edit_view {
+    -fx-font-family: 'Montserrat', sans-serif; 
+    -fx-padding: 10px 10px 10px 10px;
+    -fx-font-size: 15px;
+    -fx-border-color: rgb(0, 0, 0);
+    -fx-border-thickness: 10px;
+}
+
+.selected_component_edit_view {
+    -fx-font-family: 'Montserrat', sans-serif; 
+    -fx-background-color: rgb(228, 233, 235);
+    -fx-padding: 10px 10px 10px 10px;
+    -fx-font-size: 15px;
+    -fx-border-color: rgb(200, 200, 200);
+    -fx-border-thickness: 10px;
+}

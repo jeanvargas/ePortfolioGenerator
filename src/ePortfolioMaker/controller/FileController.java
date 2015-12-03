@@ -99,7 +99,7 @@ public class FileController {
     }
     
     public void handleAddImageRequest() {
-        AddImageDialogView image = new AddImageDialogView();
+        AddImageDialogView image = new AddImageDialogView(ui);
         image.setUpDialog();
     }
     
