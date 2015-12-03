@@ -29,6 +29,7 @@ public class ComponentEditView extends HBox{
    //FOR IMAGE COMPONENTS
    Image imageToView;
    ImageView imageView;
+   Label imageCaption;
    
    public ComponentEditView(Component comp) {
        if(comp.getType().equals(TEXT))
@@ -52,6 +53,8 @@ public class ComponentEditView extends HBox{
        imageView = new ImageView(imageToView);
        imageView.setFitWidth(component.getImageWidth());
        imageView.setFitHeight(component.getImageHeight());
+       imageCaption = new Label(component.getImageCaption());
        getChildren().add(imageView);
+       getChildren().add(imageCaption);
    }
 }

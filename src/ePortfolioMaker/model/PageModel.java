@@ -60,7 +60,6 @@ public class PageModel {
    
    public void reset() {
        components.clear();
-      // PropertiesManager props = PropertiesManager.getPropertiesManager();
            selectedComponent = null;
    }
    
@@ -70,8 +69,12 @@ public class PageModel {
        ui.reloadPage();
    }
    
-   public void addComponent(Image image) {
+   public void addComponent(Image image, String caption, String position, double width, double height) {
       Component compToAdd = new Component(image);
+      compToAdd.setWidth(width);
+      compToAdd.setHeight(height);
+      compToAdd.setImagePos(position);
+      compToAdd.setImageCaption(caption);
       components.add(compToAdd);
       ui.reloadPage();
    }

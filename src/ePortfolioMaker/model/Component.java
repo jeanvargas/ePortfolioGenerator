@@ -33,11 +33,12 @@ public class Component {
     }*/
     
     //IMAGE COMPONENT VARIABLES
-    String imageCaption;
     Image imageComponent;
-    double scaledWidth = DEFAULT_THUMBNAIL_WIDTH;
+    double scaledWidth;
     double perc;
     double scaledHeight;
+    String imagePosition;
+    String imageCaption;
 	        
     public Component(String data) {
         type = TEXT;
@@ -52,8 +53,6 @@ public class Component {
         idCounter++;
         id = idCounter;
         imageComponent = image;
-        perc = scaledWidth / imageComponent.getWidth();
-        scaledHeight = imageComponent.getHeight() * perc;
     }
     
     public Component(Media video) {
@@ -68,6 +67,21 @@ public class Component {
     }
     */
    
+    public void setWidth(double w) {
+        scaledWidth = w;
+    }
+    
+    public void setHeight(double h) {
+        scaledHeight = h;
+    }
+    
+    public void setImagePos(String p) {
+        imagePosition = p;
+    }
+    
+    public void setImageCaption(String s) {
+        imageCaption = s;
+    }
     
     public String getType(){
         return type;
@@ -93,6 +107,13 @@ public class Component {
         return scaledWidth;
     }
     
+    public String getImagePos() {
+        return imagePosition;
+    }
+    
+    public String getImageCaption() {
+        return imageCaption;
+    }
     
   /*  public String getComponentID() {
         return componentID;

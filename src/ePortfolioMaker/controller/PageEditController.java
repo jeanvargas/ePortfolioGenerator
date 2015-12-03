@@ -25,8 +25,8 @@ public class PageEditController {
         page.addComponent(type);
     }
     
-    public void processAddComponentRequest(Image image) {
+    public void processAddComponentRequest(Image image, String caption, String position, double width, double height) {
         PageModel page = ui.getPage();
-        page.addComponent(image);
+        page.addComponent(image, caption, position, width, height);
     }
 }
