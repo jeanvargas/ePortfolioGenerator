@@ -10,6 +10,7 @@ import ePortfolioMaker.view.ePortfolioMakerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
 import properties_manager.PropertiesManager;
 
 /**
@@ -69,12 +70,28 @@ public class PageModel {
        ui.reloadPage();
    }
    
-   public void addComponent(Image image, String caption, String position, double width, double height) {
+   public void addComponent(Image image, String caption, String position, 
+           double width, double height, String fileName, String filePath) {
       Component compToAdd = new Component(image);
       compToAdd.setWidth(width);
       compToAdd.setHeight(height);
       compToAdd.setImagePos(position);
       compToAdd.setImageCaption(caption);
+      compToAdd.setImageFileName(fileName);
+      compToAdd.setImageFilePath(filePath);
+      components.add(compToAdd);
+      ui.reloadPage();
+   }
+   
+    public void addComponent(Media video, String caption, String position, 
+            double width, double height, String fileName, String filePath) {
+      Component compToAdd = new Component(video);
+      compToAdd.setVideoWidth(width);
+      compToAdd.setVideoHeight(height);
+      compToAdd.setVideoPosition(position);
+      compToAdd.setVideoCaption(caption);
+      compToAdd.setVideoFileName(fileName);
+      compToAdd.setVideoFilePath(filePath);
       components.add(compToAdd);
       ui.reloadPage();
    }

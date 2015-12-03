@@ -8,6 +8,7 @@ package ePortfolioMaker.model;
 import static ePortfolioMaker.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
 import static ePortfolioMaker.StartupConstants.IMAGE;
 import static ePortfolioMaker.StartupConstants.TEXT;
+import static ePortfolioMaker.StartupConstants.VIDEO;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 
@@ -23,15 +24,7 @@ public class Component {
     
     //TEXT COMPONENT VARIABLES
     String textCompData;
- //   String textCompType;
-    
-    /*public Component(String initType){
-        TYPE = initType;
-        idCounter++;
-        id = idCounter;
-     //   componentID = TYPE + id;
-    }*/
-    
+ 
     //IMAGE COMPONENT VARIABLES
     Image imageComponent;
     double scaledWidth;
@@ -39,6 +32,13 @@ public class Component {
     double scaledHeight;
     String imagePosition;
     String imageCaption;
+    String imageFileName;
+    String imagePath;
+    
+    //VIDEO COMPONENT VARIABLES
+    Media videoComponent;
+    double videoWidth, videoHeight;
+    String videoPosition, videoCaption, videoFileName, videoFilePath;
 	        
     public Component(String data) {
         type = TEXT;
@@ -56,7 +56,10 @@ public class Component {
     }
     
     public Component(Media video) {
-        
+        type = VIDEO;
+        idCounter++;
+        id = idCounter;
+        videoComponent = video;    
     }
     
    /* public Component(Slideshow slideshow) {
@@ -75,12 +78,44 @@ public class Component {
         scaledHeight = h;
     }
     
+    public void setVideoWidth(double w) {
+        videoWidth = w;
+    }
+    
+    public void setVideoHeight(double h) {
+        videoHeight = h;
+    }
+    
+    public void setVideoPosition(String p) {
+        videoPosition = p;
+    }
+    
+    public void setVideoCaption(String c) {
+        videoCaption = c;
+    }
+    
+    public void setVideoFileName(String vFileName) {
+        videoFileName = vFileName;
+    }
+    
+    public void setVideoFilePath(String vFilePath) {
+        videoFilePath = vFilePath;
+    }
+    
     public void setImagePos(String p) {
         imagePosition = p;
     }
     
     public void setImageCaption(String s) {
         imageCaption = s;
+    }
+    
+    public void setImageFilePath(String filePath) {
+        
+    }
+    
+    public void setImageFileName(String fileName) {
+        
     }
     
     public String getType(){
@@ -115,6 +150,41 @@ public class Component {
         return imageCaption;
     }
     
+    public String getImageFilePath() {
+        return imagePath;
+    }
+    
+    public String getImageFileName() {
+        return imageFileName;
+    }
+    
+    public double getVideoHeight() {
+        return videoHeight;
+    }
+    
+    public double getVideoWidth() {
+        return videoWidth;
+    }
+    
+    public String getVideoPosition() {
+        return videoPosition;
+    }
+    
+    public String getVideoCaption() {
+        return videoCaption;
+    }
+    
+    public String getVideoFilePath() {
+        return videoFilePath;
+    }
+    
+    public String getVideoFileName() {
+        return videoFileName;
+    }
+    
+    public Media getVideoComponent() {
+        return videoComponent;
+    }
   /*  public String getComponentID() {
         return componentID;
     }*/

@@ -49,6 +49,7 @@ public class AddImageDialogView {
     String pos = "default";
     double perc;
     double scaledHeight;
+    String imageFileName, imageFilePath;
     
     public AddImageDialogView(ePortfolioMakerView initUI) {
         ui = initUI;
@@ -113,7 +114,7 @@ public class AddImageDialogView {
          }else {
              height = Double.parseDouble(heightField.getText());
          }
-         pageEditController.processAddComponentRequest(imageComponent, caption, pos, width, height);
+         pageEditController.processAddComponentRequest(imageComponent, caption, pos, width, height, imageFileName, imageFilePath);
          stage.close();
          } catch(Exception a) {
                 ErrorHandler eH = new ErrorHandler(null);
@@ -153,6 +154,8 @@ public class AddImageDialogView {
             try {
                 fileURL = file.toURI().toURL();
                 imageComponent = new Image(fileURL.toExternalForm());
+                imageFileName = file.getName();
+                imageFilePath = file.getPath().substring(0, file.getPath().indexOf(file.getName()));
                 okButton.setDisable(false);
             } catch(Exception e) {
                 ErrorHandler eH = new ErrorHandler(null);

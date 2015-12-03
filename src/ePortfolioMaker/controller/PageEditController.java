@@ -8,6 +8,7 @@ package ePortfolioMaker.controller;
 import ePortfolioMaker.model.PageModel;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
 
 /**
  *
@@ -25,8 +26,13 @@ public class PageEditController {
         page.addComponent(type);
     }
     
-    public void processAddComponentRequest(Image image, String caption, String position, double width, double height) {
+    public void processAddComponentRequest(Image image, String caption, String position, double width, double height, String fileName, String filePath) {
         PageModel page = ui.getPage();
-        page.addComponent(image, caption, position, width, height);
+        page.addComponent(image, caption, position, width, height, fileName, filePath);
+    }
+    
+    public void processAddComponentRequest(Media video, String caption, String position, double width, double height, String fileName, String filePath) {
+        PageModel page = ui.getPage();
+        page.addComponent(video, caption, position, width, height, fileName, filePath);
     }
 }
