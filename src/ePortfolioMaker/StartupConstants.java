@@ -128,7 +128,10 @@ public class StartupConstants {
     public static String IMAGE = "image";
     public static String SLIDESHOW = "slideshow";
     public static String HYPERLINK = "hyperlink";
-   // public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
+    public static String TEXT_PARAGRAPH = "paragraph";
+    public static String TEXT_HEADER = "header";
+    public static String TEXT_LIST = "list";
+    public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
    // public static String    LABEL_LANGUAGE_SELECTION_PROMPT = "Select a Language:";
    // public static String    OK_BUTTON_TEXT = "OK";   
 }
