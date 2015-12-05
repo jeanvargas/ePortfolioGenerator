@@ -44,7 +44,7 @@ public class AddVideoDialogView {
     File file;
     URL fileURL;
     Media video;
-     ComboBox position;
+    ComboBox position;
     ObservableList<String> positionOptions;
     String pos = "default";
     double perc;

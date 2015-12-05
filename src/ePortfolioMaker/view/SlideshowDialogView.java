@@ -21,8 +21,10 @@ import static ePortfolioMaker.StartupConstants.ICON_MOVE_UP;
 import static ePortfolioMaker.StartupConstants.ICON_REMOVE_SLIDE;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
+import ePortfolioMaker.controller.PageEditController;
 import ePortfolioMaker.controller.SlideshowController;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.file.SlideShowFileManager;
 import ePortfolioMaker.model.Slide;
 import ePortfolioMaker.model.SlideShowModel;
 import java.io.IOException;
@@ -69,6 +71,7 @@ public class SlideshowDialogView {
     Button removeSlideButton;
     Button moveSlideUpButton;
     Button moveSlideDownButton;
+    Button doneButton;
     
     // FOR THE SLIDE SHOW TITLE
     FlowPane titlePane;
@@ -83,7 +86,7 @@ public class SlideshowDialogView {
     SlideShowModel slideShow;
 
     // THIS IS FOR SAVING AND LOADING SLIDE SHOWS
-   // SlideShowFileManager fileManager;
+    SlideShowFileManager fileManager;
 
     // THIS CLASS WILL HANDLE ALL ERRORS FOR THIS PROGRAM
    private ErrorHandler errorHandler;
@@ -96,6 +99,7 @@ ePortfolioMakerView ePortfolio;
 	// MAKE THE DATA MANAGING MODEL
 	slideShow = new SlideShowModel(ePortfolio, this);
 
+        fileManager = new SlideShowFileManager();
 	// WE'LL USE THIS ERROR HANDLER WHEN SOMETHING GOES WRONG
 //	errorHandler = new ErrorHandler(ePortfolio);
     }
@@ -156,7 +160,7 @@ ePortfolioMakerView ePortfolio;
     private void initEventHandlers() {
 	
 	// SLIDE SHOW EDIT CONTROLS
-	editController = new SlideshowController(this);
+	editController = new SlideshowController(this, fileManager);
 	addSlideButton.setOnAction(e -> {
 	    editController.processAddSlideRequest();
 	});
@@ -243,7 +247,8 @@ ePortfolioMakerView ePortfolio;
     }
     
     private void initTitleControls() {
-	PropertiesManager props = PropertiesManager.getPropertiesManager();
+	titlePane = new FlowPane();
+        /*PropertiesManager props = PropertiesManager.getPropertiesManager();
 	String labelPrompt = props.getProperty(LABEL_SLIDESHOW_TITLE);
 	titlePane = new FlowPane();
 	titleLabel = new Label(labelPrompt);
@@ -253,11 +258,21 @@ ePortfolioMakerView ePortfolio;
 	titlePane.getChildren().add(titleTextField);
 	
 	String titlePrompt = props.getProperty(LanguagePropertyType.LABEL_SLIDESHOW_TITLE);
-	titleTextField.setText(titlePrompt);
-	
-	titleTextField.textProperty().addListener(e -> {
+	titleTextField.setText("Enter title");*/
+        PageEditController pageEditController = new PageEditController(ePortfolio);
+        editController = new SlideshowController(this, fileManager);
+        doneButton = new Button("Done");
+        doneButton.setOnAction(e -> {
+            editController.saveSlideShowRequest();
+            pageEditController.processAddComponentRequest(slideShow);
+            primaryStage.close();
+        });
+        titlePane.getChildren().add(doneButton);
+        //handleSaveSlideShowRequest
+                
+	/*titleTextField.textProperty().addListener(e -> {
 	    slideShow.setTitle(titleTextField.getText());
-	});
+	});*/
     }
     
     public void reloadTitleControls() {

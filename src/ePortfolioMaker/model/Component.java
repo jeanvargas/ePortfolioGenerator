@@ -7,8 +7,10 @@ package ePortfolioMaker.model;
 
 import static ePortfolioMaker.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
 import static ePortfolioMaker.StartupConstants.IMAGE;
+import static ePortfolioMaker.StartupConstants.SLIDESHOW;
 import static ePortfolioMaker.StartupConstants.TEXT;
 import static ePortfolioMaker.StartupConstants.VIDEO;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 
@@ -23,7 +25,9 @@ public class Component {
     int id;
     
     //TEXT COMPONENT VARIABLES
+    String textType;
     String textCompData;
+    ObservableList<String> listArray;
  
     //IMAGE COMPONENT VARIABLES
     Image imageComponent;
@@ -39,13 +43,23 @@ public class Component {
     Media videoComponent;
     double videoWidth, videoHeight;
     String videoPosition, videoCaption, videoFileName, videoFilePath;
+    
+    //SLIDESHOW COMPONENT VARIABLES
+    SlideShowModel slideShowComponent;
 	        
-    public Component(String data) {
+    public Component(String data, String t) {
         type = TEXT;
         idCounter++;
         id = idCounter;
         
         textCompData = data;
+        textType = t;
+    }
+    
+    public Component(ObservableList<String> array, String t) {
+        type = TEXT;
+        textType = t;
+        listArray = array;
     }
     
     public Component(Image image) {
@@ -62,10 +76,12 @@ public class Component {
         videoComponent = video;    
     }
     
-   /* public Component(Slideshow slideshow) {
-        
+    public Component(SlideShowModel slideshow) {
+       type = SLIDESHOW; 
+       slideShowComponent = slideshow;
     }
     
+    /*
     public Component(Hyperlink hyperlink) {
     }
     */
@@ -184,6 +200,18 @@ public class Component {
     
     public Media getVideoComponent() {
         return videoComponent;
+    }
+    
+    public String getTextType() {
+        return textType;
+    }
+    
+    public ObservableList<String> getTextArray() {
+        return listArray;
+    }
+    
+    public SlideShowModel getSlideShowComponent() {
+        return slideShowComponent;
     }
   /*  public String getComponentID() {
         return componentID;

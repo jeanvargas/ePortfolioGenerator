@@ -112,6 +112,10 @@ public class FileController {
         AddHyperlinkDialogView hyperlink = new AddHyperlinkDialogView(ui);
         hyperlink.setUpDialog();
     }
+    
+    public void removeComponentRequest() {
+        ui.getPage().removeSelectedComponent();
+    }
             
    }
 

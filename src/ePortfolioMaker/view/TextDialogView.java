@@ -24,11 +24,17 @@ import static ePortfolioMaker.StartupConstants.ICON_TEXT_REMOVE_LIST_ITEM;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
 import static ePortfolioMaker.StartupConstants.TEXT;
+import static ePortfolioMaker.StartupConstants.TEXT_HEADER;
+import static ePortfolioMaker.StartupConstants.TEXT_LIST;
+import static ePortfolioMaker.StartupConstants.TEXT_PARAGRAPH;
 import ePortfolioMaker.controller.PageEditController;
 import ePortfolioMaker.controller.TextDialogController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -36,6 +42,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -52,10 +59,15 @@ public class TextDialogView {
     BorderPane borderPane;
     Label enterTextLabel;
     VBox paragraphBox, headerBox, listBox;
+    ScrollPane listScrollPane;
     Button paragraphButton, headerButton, listButton, compFontButton, okParagraphButton, 
             okHeaderButton, okListButton, addElementToListButton, removeListElemenButton;
     TextArea paragraphTextField;
     TextField headerTextField, listTextField;
+    ObservableList<String> listElements;
+    ObservableList<Label> listLabels;
+    ObservableList<Button> listButtons;
+    GridPane displayListElements;
     ePortfolioMakerView ui;
     TextDialogController textDialogController;
     PageEditController pageEditController;
@@ -110,18 +122,12 @@ public class TextDialogView {
         stage.show();
     }
     
-    public void closeDialog() {
-        
-    }
-    
     public void paragraph() {
         paragraphBox = new VBox();
         paragraphBox.getStyleClass().add(CSS_CLASS_TEXT_COMP);
         
         paragraphTextField = new TextArea();
         paragraphTextField.setPrefSize(50, stage.getWidth());
-      //  paragraphTextField.prefWidth(20);
-      //  paragraphTextField.minHeight(100);
         
         paragraphBox.getChildren().add(enterTextLabel);
         paragraphBox.getChildren().add(paragraphTextField);
@@ -132,7 +138,7 @@ public class TextDialogView {
         
         pageEditController = new PageEditController(ui);
         okParagraphButton.setOnAction(e -> {
-           pageEditController.processAddComponentRequest(paragraphTextField.getText());
+           pageEditController.processAddComponentRequest(paragraphTextField.getText(), TEXT_PARAGRAPH);
            stage.close();
         });
     }
@@ -145,6 +151,13 @@ public class TextDialogView {
         headerBox.getChildren().add(enterTextLabel);
         headerBox.getChildren().add(headerTextField);
         okHeaderButton = new Button("Ok");
+        pageEditController = new PageEditController(ui);
+        
+        okHeaderButton.setOnAction(e -> {
+           pageEditController.processAddComponentRequest(headerTextField.getText(), TEXT_HEADER);
+           stage.close();
+        });
+        
         headerBox.getChildren().add(okHeaderButton);
         borderPane.setCenter(headerBox);
         compFontButton.setDisable(false);
@@ -152,29 +165,75 @@ public class TextDialogView {
     }
     
     public void list() {
+        pageEditController = new PageEditController(ui);
         listBox = new VBox();
+        listScrollPane = new ScrollPane(listBox);
+        displayListElements = new GridPane();
         listElement = new FlowPane();
         listTextField = new TextField();
         okListButton = new Button("Ok");
+        okListButton.setDisable(true);
+        listElements = FXCollections.observableArrayList();
+        listLabels = FXCollections.observableArrayList();
+        listButtons = FXCollections.observableArrayList();
         
         listElement.getChildren().add(listTextField);        
         addElementToListButton = initChildButton(listElement, 
-       ICON_TEXT_ADD_LIST_ITEM, TOOLTIP_ADD_LIST_ELEMENT, 
-       ICON_TEXT_COMP_PARAGRAPH, false);
+        ICON_TEXT_ADD_LIST_ITEM, TOOLTIP_ADD_LIST_ELEMENT, 
+        ICON_TEXT_COMP_PARAGRAPH, false);
         
         listBox.getChildren().add(listElement);
         
+        addElementToListButton.setOnAction(e -> {
+            addListElement(listTextField.getText());
+        });
+        
         FlowPane sample = new FlowPane();
-        Label sampleListElement = new Label("Sample List Element");
-        sample.getChildren().add(sampleListElement);
-        removeListElemenButton = initChildButton(sample, 
-       ICON_TEXT_REMOVE_LIST_ITEM, TOOLTIP_REMOVE_LIST_ELEMENT, 
-       ICON_TEXT_COMP_PARAGRAPH, false);
+        
+        okListButton.setOnAction(e -> {
+            pageEditController.processAddComponentRequest(listElements, TEXT_LIST);
+            stage.close();
+        });
+        
         listBox.getChildren().add(sample);
+        listBox.getChildren().add(displayListElements);
         
         listBox.getChildren().add(okListButton);
-        borderPane.setCenter(listBox);
+        borderPane.setCenter(listScrollPane);
         compFontButton.setDisable(false);
+    }
+    
+    public void addListElement(String elementToAdd){
+        listElements.add(elementToAdd);
+        Label newLabel = new Label(elementToAdd);
+        Button newButton =  initChildButton(ICON_TEXT_REMOVE_LIST_ITEM, 
+                TOOLTIP_REMOVE_LIST_ELEMENT, ICON_TEXT_COMP_PARAGRAPH, false);
+        newButton.setOnAction(e -> {
+            removeListElement(elementToAdd);
+        });
+        listLabels.add(newLabel);
+        listButtons.add(newButton);
+        loadListElements();
+    }
+    
+    public void loadListElements(){
+        displayListElements.getChildren().clear();
+        okListButton.setDisable(true);
+        if(listElements!=null && !(listElements.isEmpty())) {
+           for(int i = 0; i < listElements.size(); i++) {
+                displayListElements.add(listLabels.get(i),0,i);
+                displayListElements.add(listButtons.get(i), 1, i);
+            }
+         okListButton.setDisable(false);
+        }        
+    }
+    
+    public void removeListElement(String elementToRemove) {
+        int i = listElements.indexOf(elementToRemove);
+        listElements.remove(elementToRemove);
+        listLabels.remove(i);
+        listButtons.remove(i);
+        loadListElements();
     }
     
     public void fontOptions() {
@@ -193,6 +252,19 @@ public class TextDialogView {
     Tooltip buttonTooltip = new Tooltip(props.getProperty(tooltip.toString()));
     button.setTooltip(buttonTooltip);
     toolbar.getChildren().add(button);
+    return button;
+}
+    
+    public Button initChildButton(String iconFileName, LanguagePropertyType tooltip, String cssClass, boolean disabled) {
+    PropertiesManager props = PropertiesManager.getPropertiesManager();
+    String imagePath = "file:" + PATH_ICONS + iconFileName;
+    Image buttonImage = new Image(imagePath);
+    Button button = new Button();
+    button.getStyleClass().add(cssClass);
+    button.setDisable(disabled);
+    button.setGraphic(new ImageView(buttonImage));
+    Tooltip buttonTooltip = new Tooltip(props.getProperty(tooltip.toString()));
+    button.setTooltip(buttonTooltip);
     return button;
 }
 

@@ -6,7 +6,9 @@
 package ePortfolioMaker.controller;
 
 import ePortfolioMaker.model.PageModel;
+import ePortfolioMaker.model.SlideShowModel;
 import ePortfolioMaker.view.ePortfolioMakerView;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 
@@ -21,18 +23,30 @@ public class PageEditController {
         ui = initUI;
     }
     
-    public void processAddComponentRequest(String type) {
+    public void processAddComponentRequest(String type, String textType) {
         PageModel page = ui.getPage();
-        page.addComponent(type);
+        page.addComponent(type, textType);
     }
     
-    public void processAddComponentRequest(Image image, String caption, String position, double width, double height, String fileName, String filePath) {
+    public void processAddComponentRequest(ObservableList<String> array, String textType) {
+        PageModel page = ui.getPage();
+        page.addComponent(array, textType);
+    }
+    
+    public void processAddComponentRequest(Image image, String caption, 
+            String position, double width, double height, String fileName, String filePath) {
         PageModel page = ui.getPage();
         page.addComponent(image, caption, position, width, height, fileName, filePath);
     }
     
-    public void processAddComponentRequest(Media video, String caption, String position, double width, double height, String fileName, String filePath) {
+    public void processAddComponentRequest(Media video, String caption, 
+            String position, double width, double height, String fileName, String filePath) {
         PageModel page = ui.getPage();
         page.addComponent(video, caption, position, width, height, fileName, filePath);
+    }
+    
+    public void processAddComponentRequest(SlideShowModel slideShow) {
+        PageModel page = ui.getPage();
+        page.addComponent(slideShow);
     }
 }

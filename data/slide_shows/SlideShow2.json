@@ -1,0 +1,31 @@
+
+{
+    "title":"SlideShow2",
+    "slides":[
+        {
+            "image_file_name":"DefaultStartSlide.png",
+            "image_path":"./images/slide_show_images/",
+            "caption":"ENTER CAPTION"
+        },
+        {
+            "image_file_name":"DefaultStartSlide.png",
+            "image_path":"./images/slide_show_images/",
+            "caption":"ENTER CAPTION"
+        },
+        {
+            "image_file_name":"DefaultStartSlide.png",
+            "image_path":"./images/slide_show_images/",
+            "caption":"ENTER CAPTION"
+        },
+        {
+            "image_file_name":"DefaultStartSlide.png",
+            "image_path":"./images/slide_show_images/",
+            "caption":"ENTER CAPTION"
+        },
+        {
+            "image_file_name":"DefaultStartSlide.png",
+            "image_path":"./images/slide_show_images/",
+            "caption":"ENTER CAPTION"
+        }
+    ]
+}

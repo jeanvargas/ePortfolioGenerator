@@ -5,9 +5,12 @@
  */
 package ePortfolioMaker.controller;
 
+import ePortfolioMaker.LanguagePropertyType;
 import static ePortfolioMaker.LanguagePropertyType.DEFAULT_IMAGE_CAPTION;
 import static ePortfolioMaker.StartupConstants.DEFAULT_SLIDE_IMAGE;
 import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
+import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.file.SlideShowFileManager;
 import ePortfolioMaker.model.SlideShowModel;
 import ePortfolioMaker.view.SlideshowDialogView;
 import ePortfolioMaker.view.ePortfolioMakerView;
@@ -23,12 +26,14 @@ import properties_manager.PropertiesManager;
 public class SlideshowController {
     // APP UI
     private SlideshowDialogView ui;
+    private SlideShowFileManager slideShowIO;
     
     /**
      * This constructor keeps the UI for later.
      */
-    public SlideshowController(SlideshowDialogView initUI) {
+    public SlideshowController(SlideshowDialogView initUI, SlideShowFileManager initSlideShowFileManager) {
 	ui = initUI;
+        slideShowIO = initSlideShowFileManager;
     }
     
     /**
@@ -68,5 +73,18 @@ public class SlideshowController {
     public void processMoveSlideDownRequest() {
 	SlideShowModel slideShow = ui.getSlideShow();
 	slideShow.moveSelectedSlideDown();	
+    }
+    
+    public boolean saveSlideShowRequest() {
+        try {
+            SlideShowModel slideShowToSave = ui.getSlideShow();
+            slideShowIO.saveSlideShow(slideShowToSave);
+            return true;
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_UNEXPECTED);
+	    return false;
+        }
+        
     }
 }

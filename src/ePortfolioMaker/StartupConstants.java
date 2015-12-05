@@ -14,11 +14,11 @@ public class StartupConstants {
     public static String UI_PROPERTIES_FILE_NAME = "properties.xml";
     public static String PROPERTIES_SCHEMA_FILE_NAME = "properties_schema.xsd";
     public static String PATH_DATA = "./data/";
-   public static String PATH_SLIDE_SHOWS = PATH_DATA + "slide_shows/";
-   public static String PATH_VIDEOS = PATH_DATA + "videos/";
-   public static String PATH_IMAGES = "./images/";
-   public static String PATH_ICONS = PATH_IMAGES + "icons/";
-   public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
+    public static String PATH_SLIDE_SHOWS = PATH_DATA + "slide_shows/";
+    public static String PATH_VIDEOS = PATH_DATA + "videos/";
+    public static String PATH_IMAGES = "./images/";
+    public static String PATH_ICONS = PATH_IMAGES + "icons/";
+    public static String PATH_SLIDE_SHOW_IMAGES = PATH_IMAGES + "slide_show_images/";
     public static String PATH_CSS = "/ePortfolioMaker/style/";
     public static String STYLE_SHEET_UI = PATH_CSS + "ePortfolioMakerStyle.css";
     public static String PATH_SITES = "./src/ePortfolioMaker/sites/";
@@ -50,7 +50,7 @@ public class StartupConstants {
     public static String ICON_ADD_NEW_PAGE = "AddPage.png";
     public static String ICON_REMOVE_PAGE = "RemovePage.png";
     public static String ICON_SELECT_PAGE = "SelectPage.png";
-        
+            
     // WORKSPACE GUI ICONS
  
     public static String ICON_SELECT_LAYOUT_TEMPLATE = "Layout.png";
@@ -69,6 +69,11 @@ public class StartupConstants {
     public static String ICON_REMOVE_COMP = "RemoveComp.png";
     public static String ICON_CHOOSE_FONT_LARGE = "CompFontLarge.png";
     public static String ICON_SELECT_COMP = "SelectComp.png";
+    
+    public static String ICON_EDIT_TEXT_COMP = "editTextComp.png";
+    public static String ICON_EDIT_IMAGE_COMP = "editImageComp.png";
+    public static String ICON_EDIT_SLIDESHOW_COMP = "editSlideShowComp.png";
+    public static String ICON_EDIT_VIDEO_COMP = "editVideoComp.png";
     
     public static String ICON_CHOOSE_FONT_SMALL = "CompFontSmall.png";
     public static String ICON_TEXT_COMP_PARAGRAPH = "TextParagraph.png";

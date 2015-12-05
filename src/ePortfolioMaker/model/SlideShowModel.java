@@ -21,11 +21,14 @@ public class SlideShowModel {
     String title;
     ObservableList<Slide> slides;
     Slide selectedSlide;
+    static int counter;
     
     public SlideShowModel(ePortfolioMakerView initUI, SlideshowDialogView initSUI) {
 	ui = initUI;
         Sui = initSUI;
 	slides = FXCollections.observableArrayList();
+        counter++;
+        title = "SlideShow"+counter;
 	reset();	
     }
 

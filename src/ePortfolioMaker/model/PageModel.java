@@ -64,8 +64,14 @@ public class PageModel {
            selectedComponent = null;
    }
    
-   public void addComponent(String data) {
-       Component compToAdd = new Component(data);
+   public void addComponent(String data, String type) {
+       Component compToAdd = new Component(data, type);
+       components.add(compToAdd);
+       ui.reloadPage();
+   }
+   
+   public void addComponent(ObservableList<String> array, String type) {
+       Component compToAdd = new Component(array, type);
        components.add(compToAdd);
        ui.reloadPage();
    }
@@ -95,4 +101,18 @@ public class PageModel {
       components.add(compToAdd);
       ui.reloadPage();
    }
+    
+    public void addComponent(SlideShowModel slideShow) {
+        Component compToAdd = new Component(slideShow);
+        components.add(compToAdd);
+        ui.reloadPage();
+    }
+    
+    public void removeSelectedComponent() {
+        if(isComponentSelected()) {
+            components.remove(selectedComponent);
+            selectedComponent = null;
+            ui.reloadPage();
+        }
+    }
 }

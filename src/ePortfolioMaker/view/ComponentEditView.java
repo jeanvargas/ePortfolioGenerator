@@ -7,15 +7,22 @@ package ePortfolioMaker.view;
 
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_COMPONENT_EDIT_VIEW;
 import static ePortfolioMaker.StartupConstants.IMAGE;
+import static ePortfolioMaker.StartupConstants.SLIDESHOW;
 import static ePortfolioMaker.StartupConstants.TEXT;
+import static ePortfolioMaker.StartupConstants.TEXT_LIST;
 import static ePortfolioMaker.StartupConstants.VIDEO;
 import ePortfolioMaker.model.Component;
+import ePortfolioMaker.model.SlideShowModel;
 import ePortfolioMaker.model.TextCompModel;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -42,6 +49,10 @@ public class ComponentEditView extends HBox{
    MediaPlayer videoPlayer;
    Label videoCaption;
    
+   //FOR SLIDESHOW COMPONENTS
+   SlideShowModel slideShow;
+   Label slideShowTitle;
+   
    public ComponentEditView(Component comp) {
        if(comp.getType().equals(TEXT))
            processTextComponent(comp);
@@ -49,14 +60,33 @@ public class ComponentEditView extends HBox{
            processImageComponent(comp);
        if(comp.getType().equals(VIDEO))
            processVideoComponent(comp);
+       if(comp.getType().equals(SLIDESHOW))
+           processSlideshowComponent(comp);
    }
    
    public void processTextComponent(Component textComp) {
        this.getStyleClass().add(CSS_CLASS_COMPONENT_EDIT_VIEW);
-       component = textComp;
-       String text = component.getTextComponentData();
-       textLabel = new Label(text);
-       getChildren().add(textLabel);
+      
+       if(textComp.getTextType().equals(TEXT_LIST)) {
+           ObservableList<String> list = textComp.getTextArray();
+           displayList(list);
+       } else {
+            component = textComp;
+            String text = component.getTextComponentData();
+            textLabel = new Label(text);
+            getChildren().add(textLabel);
+       }
+   }
+   
+   public void displayList(ObservableList<String> l) {
+       ObservableList<String> list = l;
+       GridPane displayListElements = new GridPane();
+       
+       for(int i = 0; i < list.size(); i++) {
+                Label label = new Label(list.get(i));
+                displayListElements.add(label,0,i);
+            }
+       getChildren().add(displayListElements);
    }
    
    public void processImageComponent(Component imageComp) {
@@ -82,7 +112,10 @@ public class ComponentEditView extends HBox{
        videoView.setFitWidth(component.getVideoWidth());
        videoCaption = new Label(component.getVideoCaption());
        getChildren().add(videoView);
-       getChildren().add(videoCaption);
+       
+       VBox captionControlsBox = new VBox();
+       captionControlsBox.getChildren().add(videoCaption);
+       
        Button playButton = new Button("Play");
        Button pauseButton = new Button("Pause");
        playButton.setOnAction(e -> {
@@ -91,7 +124,18 @@ public class ComponentEditView extends HBox{
        pauseButton.setOnAction(e -> {
            videoPlayer.pause();
        });
-       getChildren().add(playButton);
-       getChildren().add(pauseButton);       
+       FlowPane controls = new FlowPane();
+       controls.getChildren().add(playButton);
+       controls.getChildren().add(pauseButton);
+       
+       captionControlsBox.getChildren().add(controls);
+       getChildren().add(captionControlsBox);
+   }
+   
+   public void processSlideshowComponent(Component slideShowComp) {
+       slideShowTitle = new Label(slideShowComp.getSlideShowComponent().getTitle());
+       Label slideShow = new Label("SlideShow: ");
+       getChildren().add(slideShow);
+       getChildren().add(slideShowTitle);
    }
 }

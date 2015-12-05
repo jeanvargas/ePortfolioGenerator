@@ -9,6 +9,7 @@ import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import properties_manager.PropertiesManager;
 
 /**
@@ -18,17 +19,23 @@ import properties_manager.PropertiesManager;
 public class ePortfolioModel {
     ePortfolioMakerView ui;
     String title; //name of ePortfolio
+    String studentName; //Student Name
+    Image bannerImage;//Banner Image for ePortfolio
     ObservableList<PageModel> pages;
     PageModel selectedPage;
     
     public ePortfolioModel(ePortfolioMakerView initUI) {
         ui = initUI;
         pages = FXCollections.observableArrayList();
-        title = "Student Name";
+        studentName = "Student Name";
     }
     
     public boolean isPageSelected() {
         return selectedPage != null;
+    }
+    
+    public boolean isSelectedPage(PageModel page) {
+        return selectedPage == page;
     }
     
     public PageModel getSelectedPage() {
@@ -59,4 +66,31 @@ public class ePortfolioModel {
         ui.reloadPortfolioPages();
     }
     
+    public void setStudentName(String name) {
+         studentName = name;
+    }
+    
+    public String getStudentName() {
+        return studentName;
+    }
+    
+    public void setBannerImage(Image image) {
+        bannerImage = image;
+    }
+    
+    public Image getBannerImage() {
+        return bannerImage;
+    }
+    
+    public void removeSelectedPage() {
+        if(isPageSelected()) {
+            pages.remove(selectedPage);
+            selectedPage = null;
+            //reload pages pane
+        }       
+    }
+    
+    public void addNewPage(PageModel newPage) {
+        pages.add(newPage);
+    }
 }

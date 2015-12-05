@@ -38,11 +38,16 @@
         <property name="TOOLTIP_UPDATE_FOOTER"			value="Update Page Footer"></property>
         
         <property name="TOOLTIP_ADD_TEXT_COMP"			value="Add a Text Component"></property>
-        <property name="TOOLTIP_ADD_IMAGE_COMP"			value="Add an Image"></property>
-        <property name="TOOLTIP_ADD_SLIDESHOW_COMP"		value="Add a Slideshow"></property>
-        <property name="TOOLTIP_ADD_VIDEO_COMP"			value="Add a Video"></property>
+        <property name="TOOLTIP_ADD_IMAGE_COMP"			value="Add an Image Component"></property>
+        <property name="TOOLTIP_ADD_SLIDESHOW_COMP"		value="Add a Slideshow Component"></property>
+        <property name="TOOLTIP_ADD_VIDEO_COMP"			value="Add a Video Component"></property>
         <property name="TOOLTIP_ADD_HYPERLINK"			value="Add a Hyperlink"></property>
         <property name="TOOLTIP_REMOVE_COMP"			value="Remove Selected Component"></property>
+        
+        <property name="TOOLTIP_EDIT_TEXT_COMP"			value="Edit Text Component"></property>
+        <property name="TOOLTIP_EDIT_IMAGE_COMP"			value="Edit Image Component"></property>
+        <property name="TOOLTIP_EDIT_SLIDESHOW_COMP"		value="Edit Slideshow Component"></property>
+        <property name="TOOLTIP_EDIT_VIDEO_COMP"			value="Edit a Video Component"></property>
         
         <property name="TOOLTIP_ADD_PARAGRAPH"			value="Add a Paragraph"></property>
         <property name="TOOLTIP_ADD_HEADER"				value="Add a Header"></property>
