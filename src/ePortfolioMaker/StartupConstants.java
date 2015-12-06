@@ -76,6 +76,7 @@ public class StartupConstants {
     public static String ICON_EDIT_VIDEO_COMP = "editVideoComp.png";
     
     public static String ICON_CHOOSE_FONT_SMALL = "CompFontSmall.png";
+    public static String ICON_ADD_HYPERLINK_SMALL = "AddHyperlinkCompSmall.png";
     public static String ICON_TEXT_COMP_PARAGRAPH = "TextParagraph.png";
     public static String ICON_TEXT_COMP_HEADER = "TextHeader.png";
     public static String ICON_TEXT_COMP_LIST = "TextList.png";
