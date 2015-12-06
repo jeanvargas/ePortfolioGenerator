@@ -8,15 +8,18 @@ package ePortfolioMaker.controller;
 import ePortfolioMaker.LanguagePropertyType;
 import static ePortfolioMaker.LanguagePropertyType.DEFAULT_IMAGE_CAPTION;
 import static ePortfolioMaker.StartupConstants.DEFAULT_SLIDE_IMAGE;
+import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOWS;
 import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
 import ePortfolioMaker.error.ErrorHandler;
 import ePortfolioMaker.file.SlideShowFileManager;
+import ePortfolioMaker.model.Component;
 import ePortfolioMaker.model.SlideShowModel;
 import ePortfolioMaker.view.SlideshowDialogView;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import java.io.File;
 import java.io.IOException;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import properties_manager.PropertiesManager;
 
 /**
@@ -87,4 +90,28 @@ public class SlideshowController {
         }
         
     }
+    
+    public void promptToOpen(SlideShowModel slideShow) {
+        // AND NOW ASK THE USER FOR THE COURSE TO OPEN
+     /*   FileChooser slideShowFileChooser = new FileChooser();
+        slideShowFileChooser.setInitialDirectory(new File(PATH_SLIDE_SHOWS));
+      File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());*/
+
+     //   File selectedFile = PATH_SLIDE_SHOWS + comp.getSlideShowComponent().getTitle();
+        // ONLY OPEN A NEW FILE IF THE USER SAYS OK
+        String absolutePath = PATH_SLIDE_SHOWS + slideShow.getTitle() + ".json";
+        System.out.println("Absolute path: " + absolutePath);
+            try {
+		//SlideShowModel slideShowToLoad = ui.getSlideShow();
+                slideShowIO.loadSlideShow(slideShow, absolutePath);
+                ui.reloadSlideShowPane();
+              //  saved = true;
+                ui.updateToolbarControls(true);
+            } catch (Exception e) {
+                ErrorHandler eH = ui.getErrorHandler();
+		eH.processError(LanguagePropertyType.ERROR_DATA_FILE_LOADING);
+            }
+        
+    }
+
 }

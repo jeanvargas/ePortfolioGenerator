@@ -6,8 +6,10 @@
 package ePortfolioMaker.controller;
 
 import ePortfolioMaker.LanguagePropertyType;
+import static ePortfolioMaker.StartupConstants.SLIDESHOW;
 import static ePortfolioMaker.StartupConstants.TEXT;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.file.SlideShowFileManager;
 import ePortfolioMaker.model.Component;
 import ePortfolioMaker.model.PageModel;
 import ePortfolioMaker.model.ePortfolioModel;
@@ -133,6 +135,21 @@ public class FileController {
     public void editComponentRequest(Component comp) {
         if(comp.getType().equals(TEXT)) {
             TextDialogView textDialog = new TextDialogView(ui, comp);
+        }
+        if(comp.getType().equals(SLIDESHOW)) {
+            System.out.println("Component Type:" + comp.getType());
+            SlideshowDialogView slideShow = new SlideshowDialogView(ui);
+            Stage stage = new Stage();
+            slideShow.startUI(stage, "Slideshow");
+            slideShow.loadSlideShow(comp);
+     // ui.startUI(stage, "Slideshow");
+
+           // Stage stage = new Stage();
+           // slideShow.startUI(stage, "Slideshow");
+            
+       //     SlideShowFileManager io = new SlideShowFileManager();
+      //      SlideshowController controller = new SlideshowController(slideShow, io);
+       //     controller.promptToOpen(comp);
         }
     }
             

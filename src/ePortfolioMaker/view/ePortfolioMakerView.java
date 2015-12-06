@@ -402,6 +402,9 @@ public void initEventHandlers(){
   editTextComp.setOnAction(e -> {
       fileController.editComponentRequest(page.getSelectedComponent());
   });
+  editSlideShowComp.setOnAction(e -> {
+      fileController.editComponentRequest(page.getSelectedComponent());
+  });
   
 }
 

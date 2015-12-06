@@ -25,6 +25,7 @@ import ePortfolioMaker.controller.PageEditController;
 import ePortfolioMaker.controller.SlideshowController;
 import ePortfolioMaker.error.ErrorHandler;
 import ePortfolioMaker.file.SlideShowFileManager;
+import ePortfolioMaker.model.Component;
 import ePortfolioMaker.model.Slide;
 import ePortfolioMaker.model.SlideShowModel;
 import java.io.IOException;
@@ -115,6 +116,16 @@ ePortfolioMakerView ePortfolio;
 
     public ErrorHandler getErrorHandler() {
 	return errorHandler;
+    }
+    
+    public void loadSlideShow(Component comp) {
+        editController = new SlideshowController(this, fileManager);
+        setSlideShow(comp.getSlideShowComponent());
+        editController.promptToOpen(slideShow);
+    }
+    
+    public void setSlideShow(SlideShowModel s) {
+        slideShow = s;
     }
 
      public void startUI(Stage initPrimaryStage, String windowTitle) {
