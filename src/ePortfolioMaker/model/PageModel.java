@@ -5,7 +5,9 @@
  */
 package ePortfolioMaker.model;
 
+import static ePortfolioMaker.StartupConstants.COLOR_BLUE;
 import static ePortfolioMaker.StartupConstants.DEFAULT_PAGE_TITLE;
+import static ePortfolioMaker.StartupConstants.LAYOUT_ONE;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,13 +24,23 @@ public class PageModel {
    ObservableList<Component> components;
    Component selectedComponent;
    String title; //page title
+   String studentName;
+   String layoutType;
+   String colorLayoutType;
    
    public PageModel(ePortfolioMakerView initUI){
         ui = initUI;
         components = FXCollections.observableArrayList();
         title = DEFAULT_PAGE_TITLE;
         ui.getEPortfolio().setSelectedPage(this);
+        studentName = ui.getEPortfolio().getStudentName();
+        layoutType = LAYOUT_ONE;
+        colorLayoutType = COLOR_BLUE;
         reset();
+   }
+   
+   public ePortfolioModel getEPortfolio() {
+       return ui.getEPortfolio();
    }
    
    public boolean isComponentSelected(){
@@ -55,8 +67,32 @@ public class PageModel {
        return title;
    }
    
+   public String getStudentName() {
+       return studentName;
+   }
+   
    public void setTitle(String t) {
        title = t;
+   }
+   
+   public void setStudentName(String n) {
+       studentName = n;
+   }
+   
+   public void setLayout(String l) {
+       layoutType = l;
+   }
+   
+   public void setColor(String c) {
+       colorLayoutType = c;
+   }
+   
+   public String getLayout() {
+       return layoutType;
+   }
+   
+   public String getColor() {
+       return colorLayoutType;
    }
    
    public void reset() {

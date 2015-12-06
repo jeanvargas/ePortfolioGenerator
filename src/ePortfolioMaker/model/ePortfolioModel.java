@@ -21,6 +21,8 @@ public class ePortfolioModel {
     String title; //name of ePortfolio
     String studentName; //Student Name
     Image bannerImage;//Banner Image for ePortfolio
+    String bannerImageFileName;
+    String bannerImageFileNamePath;
     ObservableList<PageModel> pages;
     PageModel selectedPage;
     
@@ -28,6 +30,22 @@ public class ePortfolioModel {
         ui = initUI;
         pages = FXCollections.observableArrayList();
         studentName = "Student Name";
+    }
+    
+    public void setBannerImageFileName(String s) {
+        bannerImageFileName = s;
+    }
+    
+    public void setBannerImageFileNamePath(String s) {
+        bannerImageFileNamePath = s;
+    }
+    
+    public String getBannerImageFileName() {
+        return bannerImageFileName;
+    }
+    
+    public String getBannerImageFileNamePath() {
+        return bannerImageFileNamePath;
     }
     
     public boolean isPageSelected() {

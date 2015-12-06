@@ -6,6 +6,7 @@
 package ePortfolioMaker.model;
 
 import static ePortfolioMaker.StartupConstants.DEFAULT_THUMBNAIL_WIDTH;
+import static ePortfolioMaker.StartupConstants.FONT_ONE;
 import static ePortfolioMaker.StartupConstants.IMAGE;
 import static ePortfolioMaker.StartupConstants.SLIDESHOW;
 import static ePortfolioMaker.StartupConstants.TEXT;
@@ -29,6 +30,7 @@ public class Component {
     String textCompData;
     ObservableList<String> listArray;
     HyperlinkList hyperlinks;
+    String font;
  
     //IMAGE COMPONENT VARIABLES
     Image imageComponent;
@@ -56,13 +58,15 @@ public class Component {
         textCompData = data;
         textType = t;
         
-       hyperlinks = new HyperlinkList();
+        font = FONT_ONE;
+        hyperlinks = new HyperlinkList();
     }
     
     public Component(ObservableList<String> array, String t) {
         type = TEXT;
         textType = t;
         listArray = array;
+        font = FONT_ONE;
         
         hyperlinks = new HyperlinkList();
     }
@@ -91,6 +95,7 @@ public class Component {
     }
     */
     
+    
     public void setTextList(ObservableList<String> list) {
         listArray = list;
     }
@@ -99,6 +104,9 @@ public class Component {
         textCompData = t;
     }
     
+    public void setFont(String f) {
+        font = f;
+    }
     public void setWidth(double w) {
         scaledWidth = w;
     }
@@ -233,6 +241,10 @@ public class Component {
     
     public HyperlinkList getHyperlinkList() {
         return hyperlinks;
+    }
+    
+    public String getFont() {
+        return font;
     }
 
   /*  public String getComponentID() {

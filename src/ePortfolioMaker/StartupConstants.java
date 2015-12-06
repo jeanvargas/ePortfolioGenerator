@@ -139,6 +139,24 @@ public class StartupConstants {
     public static String TEXT_HEADER = "header";
     public static String TEXT_LIST = "list";
     public static String    LABEL_SLIDE_SHOW_TITLE = "slide_show_title";
+    
+    public static String FONT_ONE = "font_one";
+    public static String FONT_TWO = "font_two";
+    public static String FONT_THREE = "font_three";
+    public static String FONT_FOUR = "font_four";
+    public static String FONT_FIVE = "font_five";
+    
+    public static String LAYOUT_ONE = "layout_one";
+    public static String LAYOUT_TWO = "layout_two";
+    public static String LAYOUT_THREE = "layout_three";
+    public static String LAYOUT_FOUR = "layout_four";
+    public static String LAYOUT_FIVE = "layout_five";
+    
+    public static String COLOR_BLUE = "blue";
+    public static String COLOR_GREEN = "green";
+    public static String COLOR_ORANGE = "orange";
+    public static String COLOR_BLACK = "black";
+    public static String COLOR_WHITE = "white";
    // public static String    LABEL_LANGUAGE_SELECTION_PROMPT = "Select a Language:";
    // public static String    OK_BUTTON_TEXT = "OK";   
 }
