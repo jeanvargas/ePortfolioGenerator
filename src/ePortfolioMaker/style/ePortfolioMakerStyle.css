@@ -129,3 +129,7 @@
     -fx-border-thickness: 10px;
     -fx-spacing: 5px;
 }
+
+.selected_page_edit_view {
+    -fx-background-color: rgb(242, 155, 143);
+}

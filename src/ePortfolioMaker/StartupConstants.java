@@ -118,6 +118,7 @@ public class StartupConstants {
   public static String    CSS_CLASS_NAME_IMAGE_TOOLBAR = "name_image_toolbar";
   public static String    CSS_CLASS_COMPONENT_EDIT_VIEW = "component_edit_view";
   public static String    CSS_CLASS_SELECTED_COMPONENT_EDIT_VIEW = "selected_component_edit_view";
+  public static String    CSS_CLASS_SELECTED_PAGE_EDIT_VIEW = "selected_page_edit_view";
   public static String    LANGUAGE_DIALOG = "language_dialog";
   public static String    LANGUAGE_BACKGROUND = "language_background";
     

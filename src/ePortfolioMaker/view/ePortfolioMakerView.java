@@ -34,6 +34,7 @@ import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_NAME_IMAGE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_PAGE_REPRESENTATION;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_SELECTED_COMPONENT_EDIT_VIEW;
+import static ePortfolioMaker.StartupConstants.CSS_CLASS_SELECTED_PAGE_EDIT_VIEW;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_SITE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_SITE_TOOLBAR_BUTTON;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_STUDENT_NAME_LABEL;
@@ -123,6 +124,7 @@ HBox WorkspaceModeToolbar;
 Button selectPageEditorWorkspace;
 Button selectSiteViewerWorkspace;
 
+ScrollPane siteToolbarScrollPane;
 VBox siteToolbarPane, pagesPane;
 HBox sPane;
 Button addPageButton, removePageButton;
@@ -221,16 +223,19 @@ public void initWorkspaceModeToolbar(){
 
 public void initSiteToolbarPane() {
     siteToolbarPane = new VBox();
+    siteToolbarScrollPane = new ScrollPane();
     sPane = new HBox();
     pagesPane = new VBox();
     
     addPageButton = initChildButton(sPane, ICON_ADD_NEW_PAGE, TOOLTIP_ADD_NEW_PAGE, CSS_CLASS_SITE_TOOLBAR_BUTTON, true);
     removePageButton = initChildButton(sPane, ICON_REMOVE_PAGE, TOOLTIP_REMOVE_PAGE, CSS_CLASS_SITE_TOOLBAR_BUTTON, true);   
 
+    siteToolbarPane.setAlignment(Pos.CENTER);
+    siteToolbarPane.setMinWidth(150);
+    siteToolbarScrollPane.setMinWidth(150);
     siteToolbarPane.getChildren().add(sPane);
-    siteToolbarPane.getChildren().add(sPane);
-    
-  //  testSiteToolbarPane();
+    siteToolbarPane.getChildren().add(pagesPane);
+    siteToolbarScrollPane.setContent(siteToolbarPane);
 }
 
 public void initPageEditorWorkspace(){
@@ -349,7 +354,10 @@ public void initEventHandlers(){
       fileController.handleAddBannerRequest();
   });
   addPageButton.setOnAction(e -> {
-    //  newPage();
+      fileController.handleNewPageReqest();
+  });
+  removePageButton.setOnAction(e -> {
+      fileController.removePageRequest();
   });
   
   //SITE VIEWER WORKSPACE
@@ -425,7 +433,7 @@ public void initWindow(String windowTitle){
     siteToolbarPane.getStyleClass().add(CSS_CLASS_SITE_TOOLBAR);
     
     pmPane.setTop(fileToolbarPane);
-    pmPane.setLeft(siteToolbarPane);
+    pmPane.setLeft(siteToolbarScrollPane);
     primaryScene = new Scene(pmPane);
     
     // NOW TIE THE SCENE TO THE WINDOW, SELECT THE STYLESHEET
@@ -483,7 +491,26 @@ public void reloadFileSiteControls() {
 
 public void reloadPortfolioPages()
 {
-    
+    pagesPane.getChildren().clear();
+    if(ePortfolio.isPageSelected()) {
+        page = ePortfolio.getSelectedPage();
+        for(PageModel pageModel: ePortfolio.getPages()) {
+            Button pageButton = new Button(pageModel.getTitle());
+            if(ePortfolio.isSelectedPage(pageModel)) {
+                pageButton.getStyleClass().add(CSS_CLASS_SELECTED_PAGE_EDIT_VIEW);
+            }
+
+            pagesPane.getChildren().add(pageButton);
+            pageButton.setOnAction(e -> {
+                page = pageModel;
+                ePortfolio.setSelectedPage(pageModel);
+                reloadPage();
+                reloadPortfolioPages();
+            });
+        }
+        resetComponentButtons();
+        reloadPage();
+    }
 }
 
 public void reloadPage() {
@@ -535,7 +562,29 @@ public void resetEditComponentsButtons() {
 }
 
 public void resetComponentButtons() {
-    
+    if(ePortfolio.getPages()==null || ePortfolio.getPages().isEmpty()) {
+        setLayoutButton.setDisable(true);
+        setColorButton.setDisable(true);
+        addFooterButton.setDisable(true);
+        
+        addTextCompButton.setDisable(true);
+        addImageCompButton.setDisable(true);
+        addVideoCompButton.setDisable(true);
+        addSlideShowCompButton.setDisable(true);
+        addHyperlinkCompButton.setDisable(true);
+        removeCompButton.setDisable(true);
+    } else {
+        setLayoutButton.setDisable(false);
+        setColorButton.setDisable(false);
+        addFooterButton.setDisable(false);
+        
+        addTextCompButton.setDisable(false);
+        addImageCompButton.setDisable(false);
+        addVideoCompButton.setDisable(false);
+        addSlideShowCompButton.setDisable(false);
+        addHyperlinkCompButton.setDisable(false);
+        removeCompButton.setDisable(false);
+    }
 }
 
 public void siteViewer(VBox siteViewer) {
@@ -561,7 +610,7 @@ public void siteViewer(VBox siteViewer) {
 
 }*/
 
-public void newPage() {
+/*public void newPage() {
     page = new PageModel(this);
     setLayoutButton.setDisable(false);
     setColorButton.setDisable(false);
@@ -579,7 +628,7 @@ public void newPage() {
     pageTitleField.setText(DEFAULT_PAGE_TITLE);
     studentNameImage.getChildren().add(pageTitleField);
 
-}
+}*/
 
 }
 

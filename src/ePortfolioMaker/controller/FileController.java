@@ -7,6 +7,8 @@ package ePortfolioMaker.controller;
 
 import ePortfolioMaker.LanguagePropertyType;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.model.PageModel;
+import ePortfolioMaker.model.ePortfolioModel;
 import ePortfolioMaker.view.AddBannerDialogView;
 import ePortfolioMaker.view.AddHyperlinkDialogView;
 import ePortfolioMaker.view.AddImageDialogView;
@@ -50,7 +52,12 @@ public class FileController {
         }
     
     public void handleNewPageReqest()   {
-        
+        PageModel newPage = new PageModel(ui);
+        ePortfolioModel ePortfolio = ui.getEPortfolio();
+        ePortfolio.addNewPage(newPage);
+        ePortfolio.setSelectedPage(newPage);
+        ui.reloadPortfolioPages();
+        //ui.addPage(newPage);
     }
     
     public void handleSiteViewerWorkspaceRequest() {
@@ -115,6 +122,10 @@ public class FileController {
     
     public void removeComponentRequest() {
         ui.getPage().removeSelectedComponent();
+    }
+    
+    public void removePageRequest() {
+        ui.getEPortfolio().removeSelectedPage();
     }
             
    }

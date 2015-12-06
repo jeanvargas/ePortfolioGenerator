@@ -85,12 +85,21 @@ public class ePortfolioModel {
     public void removeSelectedPage() {
         if(isPageSelected()) {
             pages.remove(selectedPage);
-            selectedPage = null;
-            //reload pages pane
+            int lastPage = pages.size();
+            if(lastPage > 0) {
+                selectedPage = pages.get(lastPage-1);
+            }else {
+                selectedPage = null;
+            }
+            ui.reloadPortfolioPages();
         }       
     }
     
     public void addNewPage(PageModel newPage) {
         pages.add(newPage);
+    }
+    
+    public ObservableList<PageModel> getPages() {
+        return pages;
     }
 }
