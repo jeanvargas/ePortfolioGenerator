@@ -92,13 +92,7 @@ public class SlideshowController {
     }
     
     public void promptToOpen(SlideShowModel slideShow) {
-        // AND NOW ASK THE USER FOR THE COURSE TO OPEN
-     /*   FileChooser slideShowFileChooser = new FileChooser();
-        slideShowFileChooser.setInitialDirectory(new File(PATH_SLIDE_SHOWS));
-      File selectedFile = slideShowFileChooser.showOpenDialog(ui.getWindow());*/
 
-     //   File selectedFile = PATH_SLIDE_SHOWS + comp.getSlideShowComponent().getTitle();
-        // ONLY OPEN A NEW FILE IF THE USER SAYS OK
         String absolutePath = PATH_SLIDE_SHOWS + slideShow.getTitle() + ".json";
         System.out.println("Absolute path: " + absolutePath);
             try {

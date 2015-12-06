@@ -28,6 +28,7 @@ public class Component {
     String textType;
     String textCompData;
     ObservableList<String> listArray;
+    HyperlinkList hyperlinks;
  
     //IMAGE COMPONENT VARIABLES
     Image imageComponent;
@@ -54,12 +55,16 @@ public class Component {
         
         textCompData = data;
         textType = t;
+        
+       hyperlinks = new HyperlinkList();
     }
     
     public Component(ObservableList<String> array, String t) {
         type = TEXT;
         textType = t;
         listArray = array;
+        
+        hyperlinks = new HyperlinkList();
     }
     
     public Component(Image image) {
@@ -222,6 +227,13 @@ public class Component {
         return slideShowComponent;
     }
     
+    public void setHyperlinksList(HyperlinkList h) {
+        hyperlinks = h;
+    }
+    
+    public HyperlinkList getHyperlinkList() {
+        return hyperlinks;
+    }
 
   /*  public String getComponentID() {
         return componentID;

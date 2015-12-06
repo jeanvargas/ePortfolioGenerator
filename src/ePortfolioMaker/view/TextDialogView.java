@@ -7,6 +7,7 @@ package ePortfolioMaker.view;
 
 import ePortfolioMaker.LanguagePropertyType;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_HEADER;
+import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_HYPERLINK;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_LIST;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_LIST_ELEMENT;
 import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_ADD_PARAGRAPH;
@@ -15,6 +16,7 @@ import static ePortfolioMaker.LanguagePropertyType.TOOLTIP_SELECT_COMP_FONT;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_FILE_TOOLBAR;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_PAGE_EDITOR_WORKSPACE;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_TEXT_COMP;
+import static ePortfolioMaker.StartupConstants.ICON_ADD_HYPERLINK_SMALL;
 import static ePortfolioMaker.StartupConstants.ICON_CHOOSE_FONT_SMALL;
 import static ePortfolioMaker.StartupConstants.ICON_TEXT_ADD_LIST_ITEM;
 import static ePortfolioMaker.StartupConstants.ICON_TEXT_COMP_HEADER;
@@ -30,10 +32,12 @@ import static ePortfolioMaker.StartupConstants.TEXT_PARAGRAPH;
 import ePortfolioMaker.controller.PageEditController;
 import ePortfolioMaker.controller.TextDialogController;
 import ePortfolioMaker.model.Component;
+import ePortfolioMaker.model.HyperlinkComp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -46,6 +50,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import static javax.accessibility.AccessibleRole.PARAGRAPH;
 import properties_manager.PropertiesManager;
@@ -61,6 +66,7 @@ public class TextDialogView {
     BorderPane borderPane;
     Label enterTextLabel;
     VBox paragraphBox, headerBox, listBox;
+    TextFlow flow;
     ScrollPane listScrollPane;
     Button paragraphButton, headerButton, listButton, compFontButton, okParagraphButton, 
             okHeaderButton, okListButton, addElementToListButton, removeListElemenButton;
@@ -76,8 +82,13 @@ public class TextDialogView {
     
     String textType;
     
+    Label hyperlinkLabel;
+    Button addHyperlinkButton;
+    Component textComponent;
+    
     public TextDialogView(ePortfolioMakerView initUI) {
         ui = initUI;
+        hyperlinkLabel = new Label ("Hyperlinks: ");
         stage = new Stage();
         enterTextLabel = new Label("Enter Text:");
         buttonPane = new FlowPane();
@@ -92,6 +103,7 @@ public class TextDialogView {
     
     public TextDialogView(ePortfolioMakerView initUI, Component componentToLoad) {
         ui = initUI;
+        hyperlinkLabel = new Label ("Hyperlinks: ");
         textType = componentToLoad.getTextType();
         stage = new Stage();
         
@@ -157,10 +169,33 @@ public class TextDialogView {
         
         paragraphTextField = new TextArea();
         paragraphTextField.setPrefSize(50, stage.getWidth());
+    //    flow = new TextFlow();
+    //    flow.setPrefSize(40, stage.getWidth());
         
+       /* addHyperlinkButton = initChildButton(buttonPane, ICON_ADD_HYPERLINK_SMALL, 
+                TOOLTIP_ADD_HYPERLINK, CSS_CLASS_FILE_TOOLBAR, false);*/
+        
+        /*paragraphTextField.setOnMouseEntered(e -> {
+            addHyperlinkButton.setDisable(false);
+        });
+        */
+     /*   addHyperlinkButton.setOnAction(e -> {
+        AddHyperlinkDialogView hyperlink = new AddHyperlinkDialogView(ui, this);
+        hyperlink.setUpDialog();
+        });*/
+      /*  paragraphTextField.setOnContextMenuRequested(e -> {
+            System.out.println("This is the selected text: " + paragraphTextField.getSelectedText());
+            String t = paragraphTextField.getSelectedText();
+            Hyperlink Link = new Hyperlink("www.google.com");
+            int index = paragraphTextField.getAnchor();
+            //paragraphTextField.getChildrenUnmodifiable().add(index, Link);
+           // paragraphTextField.getSelectedText().
+        });*/
+          
         paragraphBox.getChildren().add(enterTextLabel);
         paragraphBox.getChildren().add(paragraphTextField);
-        okParagraphButton = new Button("Ok");
+   //     paragraphBox.getChildren().add(flow);
+        okParagraphButton = new Button("Add Component");
         paragraphBox.getChildren().add(okParagraphButton);
         borderPane.setCenter(paragraphBox);
         compFontButton.setDisable(false);
@@ -172,8 +207,22 @@ public class TextDialogView {
         });
     }
     
+    public void reloadHyperlinks() {
+        flow.getChildren().clear();
+        for(HyperlinkComp hyperlinkComp : textComponent.getHyperlinkList().getHyperlinks()) {
+            HyperlinkEditView hyperlinkView = new HyperlinkEditView(hyperlinkComp);
+            flow.getChildren().add(hyperlinkView);
+            hyperlinkView.setOnAction(e -> {
+                AddHyperlinkDialogView hv = new AddHyperlinkDialogView(ui, this);
+                hv.loadHyperlink(hyperlinkComp);
+            });
+        }
+    }
+    
     public void loadParagraph(Component comp) {
+       textComponent = comp;
        Label paragraphLabel = new Label("Paragraph Component:    ");
+       hyperlinkLabel = new Label("Hyperlinks: ");
         
        paragraphBox = new VBox();
        paragraphBox.getStyleClass().add(CSS_CLASS_TEXT_COMP);
@@ -182,6 +231,9 @@ public class TextDialogView {
        paragraphTextField.setPrefSize(50, stage.getWidth());
        paragraphTextField.setText(comp.getTextComponentData());
        
+       flow = new TextFlow();
+       flow.setPrefSize(50, stage.getWidth());
+       
        buttonPane.getChildren().add(paragraphLabel);
        compFontButton = initChildButton(buttonPane, ICON_CHOOSE_FONT_SMALL, 
                 TOOLTIP_SELECT_COMP_FONT, CSS_CLASS_FILE_TOOLBAR, true);
@@ -189,8 +241,13 @@ public class TextDialogView {
            textDialogController.handleFontOptionsRequest();
         });
        
+       addHyperlinkButton = initChildButton(buttonPane, ICON_ADD_HYPERLINK_SMALL, 
+                TOOLTIP_ADD_HYPERLINK, CSS_CLASS_FILE_TOOLBAR, false);
+       
        paragraphBox.getChildren().add(enterTextLabel);
        paragraphBox.getChildren().add(paragraphTextField);
+       paragraphBox.getChildren().add(hyperlinkLabel);
+       paragraphBox.getChildren().add(flow);
        okParagraphButton = new Button("Ok");
        paragraphBox.getChildren().add(okParagraphButton);
        borderPane.setCenter(paragraphBox);
@@ -202,11 +259,25 @@ public class TextDialogView {
           stage.close();
         });
        
+       addHyperlinkButton.setOnAction(e -> {
+           AddHyperlinkDialogView hyperlinkView = new AddHyperlinkDialogView(ui, this);
+           hyperlinkView.setUpDialog();
+       });
+       
+       reloadHyperlinks();
         borderPane.setTop(buttonPane);
         scene = new Scene(borderPane);
         scene.getStylesheets().add(STYLE_SHEET_UI);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public Component getComponent() {
+        return textComponent;
+    }
+    
+    public String getParagraphText() {
+        return paragraphTextField.getText();
     }
     
     public void header() {
