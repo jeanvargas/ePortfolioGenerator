@@ -90,6 +90,7 @@
 .student_name_label {
    -fx-font-family: 'Montserrat', sans-serif; 
    -fx-font-size: 20px;  
+  // -fx-spacing: 5px;
 }
 
 .text_component {

@@ -135,6 +135,7 @@ BorderPane components;
 
 FlowPane studentNameImage;
 TextField nameField, pageTitleField;
+Button addPageTitle;
 Button addBannerImage;
    
 VBox pageRepresentation;
@@ -257,6 +258,9 @@ public void initStudentNameImagePane() {
     studentNameImage.getStyleClass().add(CSS_CLASS_NAME_IMAGE_TOOLBAR);
     nameField = new TextField();
     nameField.setText(DEFAULT_STUDENT_NAME);
+    addPageTitle = new Button("Add");
+    pageTitleField = new TextField();
+    pageTitleField.setText(DEFAULT_PAGE_TITLE);
     studentNameImage.getChildren().add(nameField);
         
     addBannerImage = initChildButton(studentNameImage, 
@@ -291,7 +295,7 @@ public void initPageButtonsPane () {
     addVideoCompButton = initChildButton(ICON_ADD_VIDEO_COMP, TOOLTIP_ADD_VIDEO_COMP, CSS_CLASS_FILE_TOOLBAR, true);
     
     addSlideShowCompButton = initChildButton(ICON_ADD_SLIDESHOW_COMP, TOOLTIP_ADD_SLIDESHOW_COMP, CSS_CLASS_FILE_TOOLBAR, true);
-    addHyperlinkCompButton = initChildButton(ICON_ADD_HYPERLINK, TOOLTIP_ADD_HYPERLINK, CSS_CLASS_FILE_TOOLBAR, true);
+   // addHyperlinkCompButton = initChildButton(ICON_ADD_HYPERLINK, TOOLTIP_ADD_HYPERLINK, CSS_CLASS_FILE_TOOLBAR, true);
     removeCompButton = initChildButton(ICON_REMOVE_COMP,TOOLTIP_REMOVE_COMP, CSS_CLASS_FILE_TOOLBAR, true);
 
     chooseCompFontButton = initChildButton(ICON_CHOOSE_FONT_LARGE,TOOLTIP_SELECT_COMP_FONT, CSS_CLASS_FILE_TOOLBAR, true);
@@ -310,8 +314,8 @@ public void initPageButtonsPane () {
     componentButtonsPane.add(addImageCompButton,1,0);
     componentButtonsPane.add(addVideoCompButton,2,0);
     componentButtonsPane.add(addSlideShowCompButton,0,1);
-    componentButtonsPane.add(addHyperlinkCompButton,1,1);
-    componentButtonsPane.add(removeCompButton,2,1);
+  //  componentButtonsPane.add(addHyperlinkCompButton,1,1);
+    componentButtonsPane.add(removeCompButton,1,1);
     
     editComponentsButtonsPage.add(editTextComp,0,0);
     editComponentsButtonsPage.add(editImageComp,1,0);
@@ -345,6 +349,11 @@ public void initEventHandlers(){
   nameField.setOnAction(e -> {
       ePortfolio.setStudentName(nameField.getText());
       reloadPage();
+  });
+  addPageTitle.setOnAction(e -> {
+      page.setTitle(pageTitleField.getText());
+      reloadPage();
+      reloadPortfolioPages();
   });
   
   newPortfolioButton.setOnAction(e -> {
@@ -393,9 +402,9 @@ public void initEventHandlers(){
   addVideoCompButton.setOnAction(e -> {
      fileController.addVideoRequest();
   });
-  addHyperlinkCompButton.setOnAction(e -> {
+ /* addHyperlinkCompButton.setOnAction(e -> {
       fileController.addHyperlinkRequest();
-  });
+  });*/
   removeCompButton.setOnAction(e -> {
      fileController.removeComponentRequest();
   });
@@ -498,6 +507,8 @@ public void reloadFileSiteControls() {
 public void reloadPortfolioPages()
 {
     pagesPane.getChildren().clear();
+    Label pagesLabel = new Label("Pages: ");
+    pagesPane.getChildren().add(pagesLabel);
     if(ePortfolio.isPageSelected()) {
         page = ePortfolio.getSelectedPage();
         for(PageModel pageModel: ePortfolio.getPages()) {
@@ -521,7 +532,24 @@ public void reloadPortfolioPages()
 
 public void reloadPage() {
     pageRepresentation.getChildren().clear();
+    pageTitleField = new TextField();
+    pageTitleField.setText(DEFAULT_PAGE_TITLE);
     nameLabel.setText(ePortfolio.getStudentName());
+    Label pageTitleLabel = new Label();
+    Label titleLabel = new Label("Page Title: ");
+    
+    HBox pageTitleBox = new HBox();
+    pageTitleBox.setMinWidth(1000);
+    pageTitleBox.setAlignment(Pos.CENTER);
+    pageTitleBox.getChildren().add(pageTitleField);
+    pageTitleBox.getChildren().add(addPageTitle);
+    pageTitleBox.getChildren().add(titleLabel);
+    pageTitleLabel.setText(page.getTitle());
+    pageTitleBox.getChildren().add(pageTitleLabel);
+    pageTitleBox.getStyleClass().add(CSS_CLASS_NAME_IMAGE_TOOLBAR);
+    
+    pageRepresentation.getChildren().add(pageTitleBox);
+    
     pageRepresentation.getChildren().add(nameLabel);
     for(Component component: page.getComponents()) {
         ComponentEditView compEdit = new ComponentEditView(component);
@@ -577,7 +605,7 @@ public void resetComponentButtons() {
         addImageCompButton.setDisable(true);
         addVideoCompButton.setDisable(true);
         addSlideShowCompButton.setDisable(true);
-        addHyperlinkCompButton.setDisable(true);
+    //    addHyperlinkCompButton.setDisable(true);
         removeCompButton.setDisable(true);
     } else {
         setLayoutButton.setDisable(false);
@@ -588,7 +616,7 @@ public void resetComponentButtons() {
         addImageCompButton.setDisable(false);
         addVideoCompButton.setDisable(false);
         addSlideShowCompButton.setDisable(false);
-        addHyperlinkCompButton.setDisable(false);
+     //   addHyperlinkCompButton.setDisable(false);
         removeCompButton.setDisable(false);
     }
 }
