@@ -399,6 +399,9 @@ public void initEventHandlers(){
   removeCompButton.setOnAction(e -> {
      fileController.removeComponentRequest();
   });
+  editTextComp.setOnAction(e -> {
+      fileController.editComponentRequest(page.getSelectedComponent());
+  });
   
 }
 

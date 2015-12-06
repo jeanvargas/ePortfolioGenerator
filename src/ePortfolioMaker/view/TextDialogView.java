@@ -29,6 +29,7 @@ import static ePortfolioMaker.StartupConstants.TEXT_LIST;
 import static ePortfolioMaker.StartupConstants.TEXT_PARAGRAPH;
 import ePortfolioMaker.controller.PageEditController;
 import ePortfolioMaker.controller.TextDialogController;
+import ePortfolioMaker.model.Component;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -46,6 +47,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import static javax.accessibility.AccessibleRole.PARAGRAPH;
 import properties_manager.PropertiesManager;
 
 /**
@@ -72,6 +74,8 @@ public class TextDialogView {
     TextDialogController textDialogController;
     PageEditController pageEditController;
     
+    String textType;
+    
     public TextDialogView(ePortfolioMakerView initUI) {
         ui = initUI;
         stage = new Stage();
@@ -84,6 +88,31 @@ public class TextDialogView {
         initButtons();
         initEventHandlers();
 
+    }
+    
+    public TextDialogView(ePortfolioMakerView initUI, Component componentToLoad) {
+        ui = initUI;
+        textType = componentToLoad.getTextType();
+        stage = new Stage();
+        
+        enterTextLabel = new Label("Enter Text:");
+        buttonPane = new FlowPane();
+        buttonPane.getStyleClass().add(CSS_CLASS_PAGE_EDITOR_WORKSPACE);
+        stage.setWidth(400);
+        stage.setHeight(300);
+        borderPane = new BorderPane();
+        
+        if(textType.equals(TEXT_PARAGRAPH)) {
+            loadParagraph(componentToLoad);
+        }
+        
+        if(textType.equals(TEXT_HEADER)) {
+            loadHeader(componentToLoad);
+        }
+        
+         if(textType.equals(TEXT_LIST)) {
+            loadList(componentToLoad);
+        }   
     }
     
     public void initButtons() {
@@ -143,6 +172,43 @@ public class TextDialogView {
         });
     }
     
+    public void loadParagraph(Component comp) {
+       Label paragraphLabel = new Label("Paragraph Component:    ");
+        
+       paragraphBox = new VBox();
+       paragraphBox.getStyleClass().add(CSS_CLASS_TEXT_COMP);
+       
+       paragraphTextField = new TextArea();
+       paragraphTextField.setPrefSize(50, stage.getWidth());
+       paragraphTextField.setText(comp.getTextComponentData());
+       
+       buttonPane.getChildren().add(paragraphLabel);
+       compFontButton = initChildButton(buttonPane, ICON_CHOOSE_FONT_SMALL, 
+                TOOLTIP_SELECT_COMP_FONT, CSS_CLASS_FILE_TOOLBAR, true);
+       compFontButton.setOnAction(e -> {
+           textDialogController.handleFontOptionsRequest();
+        });
+       
+       paragraphBox.getChildren().add(enterTextLabel);
+       paragraphBox.getChildren().add(paragraphTextField);
+       okParagraphButton = new Button("Ok");
+       paragraphBox.getChildren().add(okParagraphButton);
+       borderPane.setCenter(paragraphBox);
+       compFontButton.setDisable(false);
+       
+       okParagraphButton.setOnAction(e -> {
+          comp.setTextCompData(paragraphTextField.getText());
+          ui.reloadPage();
+          stage.close();
+        });
+       
+        borderPane.setTop(buttonPane);
+        scene = new Scene(borderPane);
+        scene.getStylesheets().add(STYLE_SHEET_UI);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     public void header() {
         headerBox = new VBox();
         headerBox.getStyleClass().add(CSS_CLASS_TEXT_COMP);
@@ -162,6 +228,43 @@ public class TextDialogView {
         borderPane.setCenter(headerBox);
         compFontButton.setDisable(false);
         
+    }
+    
+    public void loadHeader(Component comp) {
+        Label headerLabel = new Label("Header Component:    ");
+        
+        buttonPane.getChildren().add(headerLabel);
+        headerBox = new VBox();
+        headerBox.getStyleClass().add(CSS_CLASS_TEXT_COMP);
+        headerTextField = new TextField();
+        
+        compFontButton = initChildButton(buttonPane, ICON_CHOOSE_FONT_SMALL, 
+                TOOLTIP_SELECT_COMP_FONT, CSS_CLASS_FILE_TOOLBAR, true);
+        compFontButton.setOnAction(e -> {
+           textDialogController.handleFontOptionsRequest();
+        });
+        
+        headerTextField.setText(comp.getTextComponentData());
+        
+        headerBox.getChildren().add(enterTextLabel);
+        headerBox.getChildren().add(headerTextField);
+        okHeaderButton = new Button("Ok");
+        
+        headerBox.getChildren().add(okHeaderButton);
+        borderPane.setCenter(headerBox);
+        compFontButton.setDisable(false);
+        
+        okHeaderButton.setOnAction(e -> {
+          comp.setTextCompData(headerTextField.getText());
+          ui.reloadPage();
+          stage.close();
+        });
+        
+        borderPane.setTop(buttonPane);
+        scene = new Scene(borderPane);
+        scene.getStylesheets().add(STYLE_SHEET_UI);
+        stage.setScene(scene);
+        stage.show();
     }
     
     public void list() {
@@ -201,6 +304,68 @@ public class TextDialogView {
         listBox.getChildren().add(okListButton);
         borderPane.setCenter(listScrollPane);
         compFontButton.setDisable(false);
+    }
+    
+    public void loadList(Component comp) {
+        listBox = new VBox();
+        listScrollPane = new ScrollPane(listBox);
+        displayListElements = new GridPane();
+        
+        Label listLabel = new Label("List Component:    ");
+        
+        buttonPane.getChildren().add(listLabel);
+        listBox.getStyleClass().add(CSS_CLASS_TEXT_COMP);
+        
+        compFontButton = initChildButton(buttonPane, ICON_CHOOSE_FONT_SMALL, 
+                TOOLTIP_SELECT_COMP_FONT, CSS_CLASS_FILE_TOOLBAR, true);
+        compFontButton.setOnAction(e -> {
+           textDialogController.handleFontOptionsRequest();
+        });
+        
+        listElement = new FlowPane();
+        listTextField = new TextField();
+        okListButton = new Button("Ok");
+        okListButton.setDisable(true);
+        listElements = FXCollections.observableArrayList();
+        listLabels = FXCollections.observableArrayList();
+        listButtons = FXCollections.observableArrayList();
+        
+        listElement.getChildren().add(listTextField);        
+        addElementToListButton = initChildButton(listElement, 
+        ICON_TEXT_ADD_LIST_ITEM, TOOLTIP_ADD_LIST_ELEMENT, 
+        ICON_TEXT_COMP_PARAGRAPH, false);
+        
+        listBox.getChildren().add(listElement);
+        
+        addElementToListButton.setOnAction(e -> {
+            addListElement(listTextField.getText());
+        });
+        
+        FlowPane sample = new FlowPane();
+        
+        okListButton.setOnAction(e -> {
+            comp.setTextList(listElements);
+            ui.reloadPage();
+            stage.close();
+        });
+        
+        listBox.getChildren().add(sample);
+        listBox.getChildren().add(displayListElements);
+        
+        ObservableList<String> getListElements = comp.getTextArray();
+        for(int i = 0; i < getListElements.size(); i++) {
+            addListElement(getListElements.get(i));
+        }
+        
+        listBox.getChildren().add(okListButton);
+        borderPane.setCenter(listScrollPane);
+        compFontButton.setDisable(false);
+        
+        borderPane.setTop(buttonPane);
+        scene = new Scene(borderPane);
+        scene.getStylesheets().add(STYLE_SHEET_UI);
+        stage.setScene(scene);
+        stage.show();
     }
     
     public void addListElement(String elementToAdd){

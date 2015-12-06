@@ -85,7 +85,15 @@ public class Component {
     public Component(Hyperlink hyperlink) {
     }
     */
+    
+    public void setTextList(ObservableList<String> list) {
+        listArray = list;
+    }
    
+    public void setTextCompData(String t) {
+        textCompData = t;
+    }
+    
     public void setWidth(double w) {
         scaledWidth = w;
     }
@@ -213,6 +221,8 @@ public class Component {
     public SlideShowModel getSlideShowComponent() {
         return slideShowComponent;
     }
+    
+
   /*  public String getComponentID() {
         return componentID;
     }*/

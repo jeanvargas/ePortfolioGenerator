@@ -6,7 +6,9 @@
 package ePortfolioMaker.controller;
 
 import ePortfolioMaker.LanguagePropertyType;
+import static ePortfolioMaker.StartupConstants.TEXT;
 import ePortfolioMaker.error.ErrorHandler;
+import ePortfolioMaker.model.Component;
 import ePortfolioMaker.model.PageModel;
 import ePortfolioMaker.model.ePortfolioModel;
 import ePortfolioMaker.view.AddBannerDialogView;
@@ -126,6 +128,12 @@ public class FileController {
     
     public void removePageRequest() {
         ui.getEPortfolio().removeSelectedPage();
+    }
+    
+    public void editComponentRequest(Component comp) {
+        if(comp.getType().equals(TEXT)) {
+            TextDialogView textDialog = new TextDialogView(ui, comp);
+        }
     }
             
    }
