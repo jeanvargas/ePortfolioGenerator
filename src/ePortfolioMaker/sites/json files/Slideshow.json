@@ -1,0 +1,31 @@
+{   
+    "page_title":"Slideshow",
+    "css_layout":"layout5.css",
+    "css_style":"style5.css",
+    "components":[
+	{
+            "div":"content",
+            "tag":"h1",
+            "content":"Welcome"
+        },
+        {
+            "div":"content",
+            "tag":"p",
+            "content":"Welcome to my ePortfolio, have a look around"
+        },
+        {
+            "div":"image",
+            "image-path":"images/WELCOME.jpg"
+        },
+        {
+          "div":"content",
+          "tag":"h1",
+          "content":"This is a fake paragraph"
+        },
+        {
+            "div":"content",
+            "tag":"p",
+            "content":"another paragraph a;lsdkfj;lkj;sldkjf ;lkjfkjd;lksjdf;lkajsd;lfkje ;lkjs;lkdfj;alskdjf;aklsjdf;laksjf ;lksdj;aslkdfja;lksdjfa;lksdjf; jkl;sdjf;alksdjf;lkajfkalsdjf;alkdsjf;alksdjf;alksjfjfka;sldkfas;ldkfja;lskdfja;ksjfa;lksdjf;kldjkdf;lkjas;lkdjfa;lkjsdfa ;lksdjf ;alksdjf;lksdjf;alksjdf;alksdjf;aklsdjf;alksjdf;lksjdkjkfkdjasldf;a;slkdfj; alkj;lkj;alskdjf;lkajsdf fkl;askdfj;laksdjf;alk sdjf;alksdjf;laksdjfa;lksdjf;alksdj as;dlkfja;lsdkfja;sldkfja kja;lskdjfa;lksdfja;lksdjf;alksdjf;alksdjf;alksdjf;alksdjfkej  ;lkasdjf;lkasj ;lkjdf;lkasjdf;lkafjiejnv;lkasjdf;laksdjf;laksdjf a;ksldfj a;lksdjf;alksdf"
+        }
+    ]
+}

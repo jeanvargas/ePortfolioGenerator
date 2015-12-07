@@ -1,0 +1,17 @@
+
+{
+    "page_title":"About",
+    "student_name":"Student Name",
+    "banner_image":"White1.jpg",
+    "banner_image_path":"/Users/Jeanmarie/Desktop/ePortfolio/",
+    "css_layout":"layout.css",
+    "css_style":"style.css",
+    "components":[
+        {
+            "type":"text",
+            "text_type":"paragraph",
+            "font":"font_one",
+            "content":"asdfadsf"
+        }
+    ]
+}

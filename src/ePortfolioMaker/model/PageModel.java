@@ -27,6 +27,7 @@ public class PageModel {
    String studentName;
    String layoutType;
    String colorLayoutType;
+   FooterModel footer;
    
    public PageModel(ePortfolioMakerView initUI){
         ui = initUI;
@@ -37,6 +38,18 @@ public class PageModel {
         layoutType = LAYOUT_ONE;
         colorLayoutType = COLOR_BLUE;
         reset();
+   }
+   
+   public void setFooter(FooterModel f) {
+       footer = f;
+   }
+   
+   public FooterModel getFooter() {
+       return footer;
+   }
+   
+   public void deleteFooter() {
+       footer = null;
    }
    
    public ePortfolioModel getEPortfolio() {

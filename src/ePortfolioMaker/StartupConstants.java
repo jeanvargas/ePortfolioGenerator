@@ -25,7 +25,8 @@ public class StartupConstants {
     public static String PATH_CSS = "/ePortfolioMaker/style/";
     public static String STYLE_SHEET_UI = PATH_CSS + "ePortfolioMakerStyle.css";
     public static String PATH_SITES = "./src/ePortfolioMaker/sites/";
-   // public static String PATH = "/src/ePortfolioMaker/sites/";
+    public static String PATH_JSON_FILES = PATH_SITES + "json files/";
+    public static String PATH = "/src/ePortfolioMaker/sites/";
     public static String CSS_FOLDER = "/css";
     public static String JS_FOLDER = "/javascript";
     public static String IMAGES_FOLDER = "/images";
@@ -150,17 +151,17 @@ public class StartupConstants {
     public static String FONT_FOUR = "font_four";
     public static String FONT_FIVE = "font_five";
     
-    public static String LAYOUT_ONE = "layout_one";
-    public static String LAYOUT_TWO = "layout_two";
-    public static String LAYOUT_THREE = "layout_three";
-    public static String LAYOUT_FOUR = "layout_four";
-    public static String LAYOUT_FIVE = "layout_five";
+    public static String LAYOUT_ONE = "layout.css";
+    public static String LAYOUT_TWO = "layout2.css";
+    public static String LAYOUT_THREE = "layout3.css";
+    public static String LAYOUT_FOUR = "layout4.css";
+    public static String LAYOUT_FIVE = "layout5.css";
     
-    public static String COLOR_BLUE = "blue";
-    public static String COLOR_GREEN = "green";
-    public static String COLOR_ORANGE = "orange";
-    public static String COLOR_BLACK = "black";
-    public static String COLOR_WHITE = "white";
+    public static String COLOR_BLUE = "style.css";
+    public static String COLOR_GREEN = "style2.css";
+    public static String COLOR_ORANGE = "style3.css";
+    public static String COLOR_BLACK = "style4.css";
+    public static String COLOR_WHITE = "style5.css";
    // public static String    LABEL_LANGUAGE_SELECTION_PROMPT = "Select a Language:";
    // public static String    OK_BUTTON_TEXT = "OK";   
 }

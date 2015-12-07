@@ -6,7 +6,13 @@
 package ePortfolioMaker.view;
 
 import ePortfolioMaker.LanguagePropertyType;
+import static ePortfolioMaker.StartupConstants.COLOR_BLACK;
+import static ePortfolioMaker.StartupConstants.COLOR_BLUE;
+import static ePortfolioMaker.StartupConstants.COLOR_GREEN;
+import static ePortfolioMaker.StartupConstants.COLOR_ORANGE;
+import static ePortfolioMaker.StartupConstants.COLOR_WHITE;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_COLOR_OPTION;
+import static ePortfolioMaker.StartupConstants.LAYOUT_FIVE;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
 import javafx.scene.Scene;
@@ -55,11 +61,21 @@ public class ColorThemeDialog {
         blueButton.setGraphic(blue);
         colorOptions.getChildren().add(blueButton);
         
+        blue.setOnMousePressed(e -> {
+            ui.getPage().setColor(COLOR_BLUE);
+            stage.close();
+        });
+        
         green = new Rectangle(0,0,120,25);
         green.setFill(Color.rgb(191,229,155,0.4));
         greenButton = new Button();
         greenButton.setGraphic(green);
         colorOptions.getChildren().add(greenButton);
+        
+        green.setOnMousePressed(e -> {
+            ui.getPage().setColor(COLOR_GREEN);
+            stage.close();
+        });
         
         orange = new Rectangle(0,0,120,25);
         orange.setFill(Color.rgb(242, 198, 113, 1.0));
@@ -67,17 +83,32 @@ public class ColorThemeDialog {
         orangeButton.setGraphic(orange);
         colorOptions.getChildren().add(orangeButton);
         
+        orange.setOnMousePressed(e -> {
+            ui.getPage().setColor(COLOR_ORANGE);
+            stage.close();
+        });
+        
         white = new Rectangle(0,0,120,25);
         white.setFill(Color.rgb(255, 255, 255, 1.0));
         whiteButton = new Button();
         whiteButton.setGraphic(white);
         colorOptions.getChildren().add(whiteButton);
         
+        white.setOnMousePressed(e -> {
+            ui.getPage().setColor(COLOR_WHITE);
+            stage.close();
+        });
+        
         black = new Rectangle(0,0,120,25);
         black.setFill(Color.rgb(0, 0, 0, 1.0));
         blackButton = new Button();
         blackButton.setGraphic(white);
         colorOptions.getChildren().add(blackButton);
+        
+        black.setOnMousePressed(e -> {
+            ui.getPage().setColor(COLOR_BLACK);
+            stage.close();
+        });
         
         
         

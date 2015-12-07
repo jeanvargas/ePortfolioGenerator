@@ -1,0 +1,137 @@
+/*
+layout
+*/
+
+body{
+    margin:0px;
+    background-image: url(eight_horns.png);
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+.header {
+    height:250px;
+    //width:960px;
+    margin:auto;
+    background-position: center;
+}
+
+.name2{
+//visibility: hidden;
+//margin-top:10px;
+text-align: center;
+//width: 960px;
+height: 70px;
+  //  border: 1px solid #CCC;
+
+}
+
+.textname{
+   height: 80px;
+   margin: 0;
+   padding: 0;
+   float: right;
+   margin-top: 125px;
+   padding-right: 31px; 
+   border-top-left-radius: 25px;
+   border-bottom-left-radius: 25px;
+   visibility: hidden;
+}
+.menubar {
+    height:75px;
+    width:960px;
+    margin:auto;
+    text-align: center; 
+    z-index: 1;
+}
+
+.menu {
+  padding-left: 13px;
+  text-align: left;
+  z-index: 1;
+}
+
+ul {
+  z-index:1;
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 15px 4px 17px 0;
+  list-style: none;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+ul li {
+  z-index: 1;
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 15px 20px;
+  background: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+ul li:hover {
+  background: #555;
+  color: #fff;
+}
+ul li ul {
+  z-index: 1;
+  padding: 0;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 150px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+}
+ul li ul li { 
+  z-index: 1;
+  background: #555; 
+  display: block; 
+  color: #fff;
+  text-shadow: 0 -1px 0 #000;
+}
+ul li ul li:hover { background: #666; }
+ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+.content {
+    width:960px;
+    height: 2000px;
+    //margin-top:-84px;
+    margin: 10px auto;
+    position: relative;
+    z-index: -1;
+}
+
+.content h1 {
+    margin: 5%;
+    font-size: 22pt;
+}
+
+.content p {
+    margin: 5%;
+}
+
+.header p {
+    margin-left: 10px;
+    margin-top: 15px;
+}
+

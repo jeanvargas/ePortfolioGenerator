@@ -1,0 +1,89 @@
+/*
+color & font
+*/
+@import url(https://fonts.googleapis.com/css?family=Raleway:400);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+@import url(https://fonts.googleapis.com/css?family=Michroma);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300);
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+body{
+    //background-color: rgb(217, 229, 228); 
+    background-image: url(graphite.jpg);
+
+}
+.header {
+  //  background-image: url(http://i255.photobucket.com/albums/hh122/totallysevere/heads_will_roll.png);
+   // background-position: center;
+    //border:1px solid #CCC;
+//	-moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+//	-webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+//	box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+background-image: url(http://i255.photobucket.com/albums/hh122/totallysevere/heads_will_roll.png);
+background-position: center;
+border:1px solid #CCC;
+    
+}
+
+.name{
+   //background:rgba(100,106,124, .9);
+   //font-size: 24pt;
+   //font-family: 'Raleway', sans-serif;
+   //color: rgb(255, 255, 255);
+  // text-shadow: 1px 1px white, -.5px -.5px white;
+ // -webkit-box-shadow: 100px 100px 100px rgb(174, 174, 174);
+  //-moz-box-shadow: 100px 100px 100px rgb(174, 174, 174);
+//box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+.textname {
+     background:rgba(100,106,124, .9);
+   font-size: 24pt;
+   font-family: 'Permanent Marker', cursive;
+   color: rgb(255, 255, 255);
+}
+
+.menubar {
+
+}
+
+.menu {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 14pt;
+}
+
+ul {
+
+}
+ul li {
+}
+ul li:hover {
+}
+ul li ul {
+}
+ul li ul li { 
+}
+ul li ul li:hover { }
+ul li:hover ul {
+}
+
+.content {
+    //background: rgba(144, 212, 207, .4);
+    //border: 1px solid #CCC;
+    color: #000000;
+    //color: rgb(100,106,124);
+    font-size: 14pt;    
+    font-family: 'Permanent Marker', cursive;
+}
+
+.content h1 {
+font-family: 'Permanent Marker', cursive;
+color: #000000;
+}
+
+.content p {
+
+}
+
+.header p {
+
+}

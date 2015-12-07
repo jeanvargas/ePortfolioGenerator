@@ -1,0 +1,18 @@
+
+{
+    "eportfolio_title":"default_title",
+    "student_name":"Jeanmarie Vargas",
+    "banner_image":"White1.jpg",
+    "pages":[
+        {
+            "title":"Index",
+            "style":"style.css",
+            "layout":"layout.css"
+        },
+        {
+            "title":"About",
+            "style":"style.css",
+            "layout":"layout.css"
+        }
+    ]
+}

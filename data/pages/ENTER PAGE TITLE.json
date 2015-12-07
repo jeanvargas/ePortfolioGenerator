@@ -1,0 +1,32 @@
+
+{
+    "page_title":"ENTER PAGE TITLE",
+    "student_name":"Student Name",
+    "banner_image_file_name":"White1.jpg",
+    "banner_image_path":"/Users/Jeanmarie/Desktop/ePortfolio/",
+    "layout":"layout_one",
+    "color":"blue",
+    "components":[
+        {
+            "type":"text",
+            "text_type":"header",
+            "font":"font_one",
+            "text_comp_data":"Welcome"
+        },
+        {
+            "type":"text",
+            "text_type":"paragraph",
+            "font":"font_one",
+            "text_comp_data":"This is the first paragraph\nas;dlkfjads'f\nasdjf;lkasdjfa\nsdfk;laksdjf\nasdfka;klsdjfadsf"
+        },
+        {
+            "type":"image",
+            "image_comp_file_path":"/Users/Jeanmarie/Desktop/cookie/",
+            "image_comp_file_name":"3.jpg",
+            "image_comp_caption":"",
+            "image_comp_float":"Default",
+            "image_comp_width":200.0,
+            "image_comp_height":132.49211356466876
+        }
+    ]
+}

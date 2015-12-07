@@ -1,0 +1,23 @@
+
+{
+    "page_title":"Index",
+    "student_name":"Student Name",
+    "banner_image_file_name":"White1.jpg",
+    "banner_image_path":"/Users/Jeanmarie/Desktop/ePortfolio/",
+    "css_layout":"layout.css",
+    "css_style":"style.css",
+    "components":[
+        {
+            "type":"text",
+            "text_type":"header",
+            "font":"font_one",
+            "content":"Header"
+        },
+        {
+            "type":"text",
+            "text_type":"paragraph",
+            "font":"font_one",
+            "content":"asdfasdfasdf"
+        }
+    ]
+}

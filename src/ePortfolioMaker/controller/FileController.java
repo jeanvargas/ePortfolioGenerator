@@ -87,6 +87,7 @@ public class FileController {
         ePortfolioFileManager eportFileManager = new ePortfolioFileManager();
         try {
         eportFileManager.savePage(ui.getEPortfolio().getSelectedPage());
+        eportFileManager.MakeSiteMap(ui.getEPortfolio());
         } catch (IOException ioe) {
             ErrorHandler eH = ui.getErrorHandler();
             eH.processError(LanguagePropertyType.ERROR_DATA_FILE_LOADING);

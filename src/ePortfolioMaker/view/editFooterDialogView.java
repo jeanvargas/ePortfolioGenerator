@@ -12,6 +12,7 @@ import static ePortfolioMaker.StartupConstants.CSS_CLASS_TEXT_COMP;
 import static ePortfolioMaker.StartupConstants.ICON_CHOOSE_FONT_SMALL;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
+import ePortfolioMaker.model.FooterModel;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,12 +74,71 @@ public class editFooterDialogView {
          okButton = new Button("Ok");
          paragraphBox.getChildren().add(okButton);
          borderPane.setCenter(paragraphBox);
+         
+         okButton.setOnAction(e -> {
+             FooterModel footer = new FooterModel(paragraphTextField.getText());
+             ui.getPage().setFooter(footer);
+             ui.reloadPage();
+             stage.close();
+         });
 
         scene = new Scene(borderPane);
         scene.getStylesheets().add(STYLE_SHEET_UI);
         stage.setScene(scene);
         stage.show();
         
+    }
+    
+    public void loadFooter(FooterModel footerToLoad) {
+        stage = new Stage();
+        stage.setWidth(400);
+        stage.setHeight(300);
+        buttonPane = new FlowPane();
+        
+        compFontButton = initChildButton(buttonPane, ICON_CHOOSE_FONT_SMALL, 
+                TOOLTIP_SELECT_COMP_FONT, CSS_CLASS_FILE_TOOLBAR, false);
+         compFontButton.setOnAction(e -> {
+           FontDialogView fd = new FontDialogView(ui);
+           fd.setUpDialog();
+        });
+         
+         borderPane = new BorderPane();
+         borderPane.setTop(buttonPane);
+         
+         paragraphBox = new VBox();
+         paragraphBox.getStyleClass().add(CSS_CLASS_TEXT_COMP);
+         enterTextLabel = new Label("Enter Text:");
+         paragraphBox.getChildren().add(enterTextLabel);
+         
+         paragraphTextField = new TextArea();
+         paragraphTextField.setText(footerToLoad.getContent());
+         paragraphTextField.setPrefSize(50, stage.getWidth());
+         paragraphBox.getChildren().add(paragraphTextField);
+         
+         okButton = new Button("Ok");
+         paragraphBox.getChildren().add(okButton);
+         borderPane.setCenter(paragraphBox);
+         
+         Button deleteButton = new Button("Delete Footer");
+         paragraphBox.getChildren().add(deleteButton);
+         
+         deleteButton.setOnAction(e -> {
+             ui.getPage().deleteFooter();
+             ui.reloadPage();
+             stage.close();
+         });
+         
+         okButton.setOnAction(e -> {
+             FooterModel footer = new FooterModel(paragraphTextField.getText());
+             ui.getPage().setFooter(footer);
+             ui.reloadPage();
+             stage.close();
+         });
+
+        scene = new Scene(borderPane);
+        scene.getStylesheets().add(STYLE_SHEET_UI);
+        stage.setScene(scene);
+        stage.show();   
     }
     
     public Button initChildButton(Pane toolbar, String iconFileName, LanguagePropertyType tooltip, String cssClass, boolean disabled) {

@@ -7,6 +7,7 @@ package ePortfolioMaker.file;
 
 import static ePortfolioMaker.StartupConstants.IMAGE;
 import static ePortfolioMaker.StartupConstants.PATH_EPORTFOLIOS;
+import static ePortfolioMaker.StartupConstants.PATH_JSON_FILES;
 import static ePortfolioMaker.StartupConstants.PATH_PAGES;
 import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOWS;
 import static ePortfolioMaker.StartupConstants.SLIDESHOW;
@@ -86,14 +87,14 @@ private JsonObject makeComponentJsonObject() {
     //EPORTFOLIO
     public static String JSON_EPORTFOLIO_TITLE = "eportfolio_title";
     public static String JSON_STUDENT_NAME = "student_name";
-    public static String JSON_BANNER_IMAGE_FILE_NAME = "banner_image_file_name";
+    public static String JSON_BANNER_IMAGE_FILE_NAME = "banner_image";
     public static String JSON_BANNER_IMAGE_FILE_PATH = "banner_image_path";
     public static String JSON_PAGES_ARRAY = "pages";
     
     //PAGE
     public static String JSON_PAGE_TITLE = "page_title";
-    public static String JSON_PAGE_LAYOUT = "layout";
-    public static String JSON_PAGE_COLOR = "color";
+    public static String JSON_PAGE_LAYOUT = "css_layout";
+    public static String JSON_PAGE_COLOR = "css_style";
     public static String JSON_COMPONENTS = "components";
     public static String JSON_EXT = ".json";
     public static String SLASH = "/";
@@ -127,11 +128,22 @@ private JsonObject makeComponentJsonObject() {
     public static String JSON_TEXT_COMPONENT_TYPE = "type";
     public static String JSON_TEXT_COMPONENT_TEXT_TYPE = "text_type";
     public static String JSON_TEXT_COMPONENT_FONT = "font";
-    public static String JSON_TEXT_COMPONENT_DATA = "text_comp_data";
+    public static String JSON_TEXT_COMPONENT_DATA = "content";
     public static String JSON_TEXT_COMP_LIST_ELEMENTS = "list_elements";
     public static String JSON_TEXT_COMPONENT_LIST_DATA = "text_comp_list_element_data";
     public static String JSON_TEXT_COMP_HYPERLINK_DISPLAY = "hyperlink_display";
     public static String JSON_TEXT_COMP_HYPERLINK_TARGET = "hyperlink_target";
+    public static String JSON_DIV = "div";
+    public static String JSON_CONTENT = "content";
+    public static String JSON_TAG = "tag";
+    public static String JSON_HEADER = "h1";
+    public static String JSON_PARAGRAPH = "p";
+    
+    //SITE MAP
+    public static String JSON_SITE_MAP_TITLE = "title";
+    public static String JSON_SITE_MAP_STYLE = "style";
+    public static String JSON_SITE_MAP_LAYOUT = "layout";
+
 
     public void saveEPortfolio(ePortfolioModel ePortfolioToSave) throws IOException {
         StringWriter sw = new StringWriter();
@@ -164,6 +176,61 @@ private JsonObject makeComponentJsonObject() {
 	pw.close();
 	System.out.println(prettyPrinted);
         
+    }
+    
+    public void MakeSiteMap(ePortfolioModel ePortfolioToSave) throws IOException {
+        StringWriter sw = new StringWriter();
+        JsonArray pagesArray = makeSiteMapPagesArray(ePortfolioToSave.getPages());
+        
+        JsonObject ePortfolioJsonObject = Json.createObjectBuilder()
+                .add(JSON_EPORTFOLIO_TITLE, ePortfolioToSave.getTitle())
+                .add(JSON_STUDENT_NAME, ePortfolioToSave.getStudentName())
+                .add(JSON_BANNER_IMAGE_FILE_NAME, ePortfolioToSave.getBannerImageFileName())
+                .add(JSON_PAGES_ARRAY, pagesArray).build();
+        Map<String, Object> properties = new HashMap<>(1);
+	properties.put(JsonGenerator.PRETTY_PRINTING, true);
+
+	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(ePortfolioJsonObject);
+	jsonWriter.close();
+        
+        // INIT THE WRITER
+	String pageTitle = "" + ePortfolioToSave.getTitle();
+	String jsonFilePath = PATH_JSON_FILES + "site_map" + JSON_EXT;
+        System.out.println("jsonFilePth" + jsonFilePath);
+	OutputStream os = new FileOutputStream(jsonFilePath);
+	JsonWriter jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(ePortfolioJsonObject);
+	String prettyPrinted = sw.toString();
+	PrintWriter pw = new PrintWriter(jsonFilePath);
+	pw.write(prettyPrinted);
+	pw.close();
+	System.out.println(prettyPrinted);
+    }
+    
+    public JsonArray makeSiteMapPagesArray(List<PageModel> pages) {
+        JsonArrayBuilder jsb = Json.createArrayBuilder();
+
+        for(PageModel page : pages) {
+            JsonObject jso = makeSiteMapPageObject(page);
+            jsb.add(jso);
+        }
+        
+        JsonArray jA = jsb.build();
+        return jA;
+    }
+    
+    public JsonObject makeSiteMapPageObject(PageModel pageToSave) {
+        //BUILD COMPONENTS ARRAY
+        
+        JsonObject pageJsonObject = Json.createObjectBuilder()
+		.add(JSON_SITE_MAP_TITLE, pageToSave.getTitle())
+		.add(JSON_SITE_MAP_STYLE, pageToSave.getColor())
+                .add(JSON_SITE_MAP_LAYOUT, pageToSave.getLayout())
+		.build();
+        
+        return pageJsonObject;
     }
     
     public JsonArray makePagesArray(List<PageModel> pages) {

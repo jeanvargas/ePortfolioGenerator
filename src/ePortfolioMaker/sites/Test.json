@@ -1,0 +1,46 @@
+
+{
+    "title":"Test",
+    "slides":[
+        {
+            "image_file_name":"chipmunk.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"This is a squirrel"
+        },
+        {
+            "image_file_name":"cookie.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"Darth Vader and Cookies"
+        },
+        {
+            "image_file_name":"hat.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"My son :-)"
+        },
+        {
+            "image_file_name":"home.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"Home"
+        },
+        {
+            "image_file_name":"jello.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"Jello Salad"
+        },
+        {
+            "image_file_name":"jello2.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"More Jello Salad"
+        },
+        {
+            "image_file_name":"me.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"This is me"
+        },
+        {
+            "image_file_name":"meagain.jpg",
+            "image_path":"images/slide_show_images/",
+            "caption":"This is me again"
+        }
+    ]
+}

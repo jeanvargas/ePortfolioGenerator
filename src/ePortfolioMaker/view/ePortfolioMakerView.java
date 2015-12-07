@@ -355,6 +355,9 @@ public void initEventHandlers(){
       reloadPage();
       reloadPortfolioPages();
   });
+  addFooterButton.setOnAction(e -> {
+      fileController.handleAddFooterRequest();
+  });
   
   savePortfolioButton.setOnAction(e -> {
       fileController.handleSaveEportfolioRequest();
@@ -548,6 +551,9 @@ public void reloadPortfolioPages()
 
 public void reloadPage() {
     updateSiteViewControls();
+    if(page.getFooter()!=null) {
+        addFooterButton.setDisable(true);
+    }
     pageRepresentation.getChildren().clear();
     pageTitleField = new TextField();
     pageTitleField.setText(DEFAULT_PAGE_TITLE);
@@ -591,6 +597,15 @@ public void reloadPage() {
             page.setSelectedComponent(component);
             resetEditComponentsButtons();
             reloadPage();
+        });
+    }
+    
+    if(page.getFooter()!=null) {
+        FooterModelView footer = new FooterModelView(page.getFooter());
+        pageRepresentation.getChildren().add(footer);
+        footer.setOnMousePressed(e -> {
+            editFooterDialogView edit = new editFooterDialogView(this);
+            edit.loadFooter(page.getFooter());
         });
     }
     resetEditComponentsButtons();
@@ -660,41 +675,6 @@ public void updateViewerToolbar() {
     addPageButton.setDisable(false);
     removePageButton.setDisable(false);
 }
-
-/*public void testSiteToolbarPane() {
-    Button dummy1 = new Button("Page 1");
-    Button dummy2 = new Button("Page 2");
-    Button dummy3 = new Button("Page 3");
-    Button dummy4 = new Button("Page 4");
-    Button dummy5 = new Button("Page 5");
-    
-    siteToolbarPane.getChildren().add(dummy1);
-    siteToolbarPane.getChildren().add(dummy2);
-    siteToolbarPane.getChildren().add(dummy3);
-    siteToolbarPane.getChildren().add(dummy4);
-    siteToolbarPane.getChildren().add(dummy5);
-
-}*/
-
-/*public void newPage() {
-    page = new PageModel(this);
-    setLayoutButton.setDisable(false);
-    setColorButton.setDisable(false);
-    addFooterButton.setDisable(false);
-    addTextCompButton.setDisable(false);         
-    addImageCompButton.setDisable(false);   
-    addVideoCompButton.setDisable(false);
-    addSlideShowCompButton.setDisable(false);    
-    addHyperlinkCompButton.setDisable(false);
-    removeCompButton.setDisable(false);
-    chooseCompFontButton.setDisable(false);
-    selectCompButton.setDisable(false);
-    
-    pageTitleField = new TextField();
-    pageTitleField.setText(DEFAULT_PAGE_TITLE);
-    studentNameImage.getChildren().add(pageTitleField);
-
-}*/
 
 }
 

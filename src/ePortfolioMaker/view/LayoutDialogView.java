@@ -7,8 +7,16 @@ package ePortfolioMaker.view;
 
 import ePortfolioMaker.LanguagePropertyType;
 import static ePortfolioMaker.StartupConstants.CSS_CLASS_TEXT_COMP;
+import static ePortfolioMaker.StartupConstants.LAYOUT_FIVE;
+import static ePortfolioMaker.StartupConstants.LAYOUT_FOUR;
+import static ePortfolioMaker.StartupConstants.LAYOUT_ONE;
+import static ePortfolioMaker.StartupConstants.LAYOUT_THREE;
+import static ePortfolioMaker.StartupConstants.LAYOUT_TWO;
 import static ePortfolioMaker.StartupConstants.PATH_ICONS;
 import static ePortfolioMaker.StartupConstants.STYLE_SHEET_UI;
+import ePortfolioMaker.model.PageModel;
+import ePortfolioMaker.model.ePortfolioModel;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -54,6 +62,28 @@ public class LayoutDialogView {
         layoutOptions.getChildren().add(layout3Button);
         layoutOptions.getChildren().add(layout4Button);
         layoutOptions.getChildren().add(layout5Button);
+        
+        layout1Button.setOnAction(e -> {
+            ePortfolioModel ePortfolio = ui.getEPortfolio();
+            ui.getPage().setLayout(LAYOUT_ONE);
+            stage.close();
+        });
+        layout2Button.setOnAction(e -> {
+            ui.getPage().setLayout(LAYOUT_TWO);
+            stage.close();
+        });
+        layout3Button.setOnAction(e -> {
+            ui.getPage().setLayout(LAYOUT_THREE);
+            stage.close();
+        });
+        layout4Button.setOnAction(e -> {
+            ui.getPage().setLayout(LAYOUT_FOUR);
+            stage.close();
+        });
+        layout5Button.setOnAction(e -> {
+            ui.getPage().setLayout(LAYOUT_FIVE);
+            stage.close();
+        });
 
         scene = new Scene(layoutOptions);
         scene.getStylesheets().add(STYLE_SHEET_UI);
