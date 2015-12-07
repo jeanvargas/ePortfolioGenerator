@@ -132,6 +132,7 @@ public class FileController {
     public void handleAddBannerRequest() {
         AddBannerDialogView addImage = new AddBannerDialogView();
         addImage.processSelectImage(ui.getEPortfolio());
+        ui.reloadPage();
     }
     
     public void handleAddImageRequest() {

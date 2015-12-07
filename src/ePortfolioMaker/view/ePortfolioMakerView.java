@@ -265,7 +265,7 @@ public void initStudentNameImagePane() {
         
     addBannerImage = initChildButton(studentNameImage, 
     ICON_SELECT_BANNER_IMAGE, TOOLTIP_SELECT_BANNER_IMAGE, 
-        CSS_CLASS_FILE_TOOLBAR_BUTTON, false);   
+        CSS_CLASS_FILE_TOOLBAR_BUTTON, true);   
 }
 
 public void initPageRepresentation() {
@@ -510,10 +510,14 @@ public void reloadFileSiteControls() {
 }
 
 public void updateSiteViewControls() {
-    if(page.getComponents()==null || page.getComponents().isEmpty())
+    if(page.getComponents()==null || page.getComponents().isEmpty()) {
         selectSiteViewerWorkspace.setDisable(true);
-    else
+        addBannerImage.setDisable(true);
+    }
+    else {
         selectSiteViewerWorkspace.setDisable(false);
+        addBannerImage.setDisable(false);
+    }
 }
 
 public void reloadPortfolioPages()
@@ -560,6 +564,13 @@ public void reloadPage() {
     pageTitleLabel.setText(page.getTitle());
     pageTitleBox.getChildren().add(pageTitleLabel);
     pageTitleBox.getStyleClass().add(CSS_CLASS_NAME_IMAGE_TOOLBAR);
+    
+    if(ePortfolio.getBannerImage()!=null) {
+        ImageView imageView = new ImageView(ePortfolio.getBannerImage());
+        pageRepresentation.getChildren().add(imageView);
+        imageView.setFitWidth(500);
+        imageView.setFitHeight(312);
+    }
     
     pageRepresentation.getChildren().add(pageTitleBox);
     
