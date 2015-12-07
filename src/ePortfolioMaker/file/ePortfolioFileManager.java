@@ -7,6 +7,7 @@ package ePortfolioMaker.file;
 
 import static ePortfolioMaker.StartupConstants.IMAGE;
 import static ePortfolioMaker.StartupConstants.PATH_EPORTFOLIOS;
+import static ePortfolioMaker.StartupConstants.PATH_PAGES;
 import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOWS;
 import static ePortfolioMaker.StartupConstants.SLIDESHOW;
 import static ePortfolioMaker.StartupConstants.TEXT;
@@ -18,6 +19,7 @@ import ePortfolioMaker.model.Component;
 import ePortfolioMaker.model.PageModel;
 import ePortfolioMaker.model.Slide;
 import ePortfolioMaker.model.SlideShowModel;
+import ePortfolioMaker.model.ePortfolioModel;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -81,11 +83,15 @@ private JsonObject makePageJsonObject() {
 private JsonObject makeComponentJsonObject() {
     return null;
 }*/
-    
-    public static String JSON_PAGE_TITLE = "title";
+    //EPORTFOLIO
+    public static String JSON_EPORTFOLIO_TITLE = "eportfolio_title";
     public static String JSON_STUDENT_NAME = "student_name";
     public static String JSON_BANNER_IMAGE_FILE_NAME = "banner_image_file_name";
     public static String JSON_BANNER_IMAGE_FILE_PATH = "banner_image_path";
+    public static String JSON_PAGES_ARRAY = "pages";
+    
+    //PAGE
+    public static String JSON_PAGE_TITLE = "page_title";
     public static String JSON_PAGE_LAYOUT = "layout";
     public static String JSON_PAGE_COLOR = "color";
     public static String JSON_COMPONENTS = "components";
@@ -127,7 +133,69 @@ private JsonObject makeComponentJsonObject() {
     public static String JSON_TEXT_COMP_HYPERLINK_DISPLAY = "hyperlink_display";
     public static String JSON_TEXT_COMP_HYPERLINK_TARGET = "hyperlink_target";
 
+    public void saveEPortfolio(ePortfolioModel ePortfolioToSave) throws IOException {
+        StringWriter sw = new StringWriter();
+        JsonArray pagesArray = makePagesArray(ePortfolioToSave.getPages());
+        
+        JsonObject ePortfolioJsonObject = Json.createObjectBuilder()
+                .add(JSON_EPORTFOLIO_TITLE, ePortfolioToSave.getTitle())
+                .add(JSON_STUDENT_NAME, ePortfolioToSave.getStudentName())
+                .add(JSON_BANNER_IMAGE_FILE_NAME, ePortfolioToSave.getBannerImageFileName())
+                .add(JSON_IMAGE_COMPONENT_FILE_PATH, ePortfolioToSave.getBannerImageFileNamePath())
+                .add(JSON_PAGES_ARRAY, pagesArray).build();
+        Map<String, Object> properties = new HashMap<>(1);
+	properties.put(JsonGenerator.PRETTY_PRINTING, true);
 
+	JsonWriterFactory writerFactory = Json.createWriterFactory(properties);
+	JsonWriter jsonWriter = writerFactory.createWriter(sw);
+	jsonWriter.writeObject(ePortfolioJsonObject);
+	jsonWriter.close();
+        
+        // INIT THE WRITER
+	String pageTitle = "" + ePortfolioToSave.getTitle();
+	String jsonFilePath = PATH_EPORTFOLIOS + pageTitle + JSON_EXT;
+        System.out.println("jsonFilePth" + jsonFilePath);
+	OutputStream os = new FileOutputStream(jsonFilePath);
+	JsonWriter jsonFileWriter = Json.createWriter(os);
+	jsonFileWriter.writeObject(ePortfolioJsonObject);
+	String prettyPrinted = sw.toString();
+	PrintWriter pw = new PrintWriter(jsonFilePath);
+	pw.write(prettyPrinted);
+	pw.close();
+	System.out.println(prettyPrinted);
+        
+    }
+    
+    public JsonArray makePagesArray(List<PageModel> pages) {
+        JsonArrayBuilder jsb = Json.createArrayBuilder();
+
+        for(PageModel page : pages) {
+            JsonObject jso = makePageObject(page);
+            jsb.add(jso);
+        }
+        
+        JsonArray jA = jsb.build();
+        return jA;
+    }
+    
+    public JsonObject makePageObject(PageModel pageToSave) {
+        
+        //BUILD COMPONENTS ARRAY
+        JsonArray componentsArray = makeComponentsJsonArray(pageToSave.getComponents());
+        
+        JsonObject pageJsonObject = Json.createObjectBuilder()
+		.add(JSON_PAGE_TITLE, pageToSave.getTitle())
+		.add(JSON_STUDENT_NAME, pageToSave.getStudentName())
+                .add(JSON_BANNER_IMAGE_FILE_NAME, pageToSave.getEPortfolio().getBannerImageFileName())
+                .add(JSON_BANNER_IMAGE_FILE_PATH, pageToSave.getEPortfolio().getBannerImageFileNamePath())
+                .add(JSON_PAGE_LAYOUT, pageToSave.getLayout())
+                .add(JSON_PAGE_COLOR, pageToSave.getColor())
+                .add(JSON_COMPONENTS, componentsArray)
+		.build();
+        
+        return pageJsonObject;
+    }
+    
     public void savePage(PageModel pageToSave) throws IOException {
         StringWriter sw = new StringWriter();
         
@@ -154,7 +222,7 @@ private JsonObject makeComponentJsonObject() {
         
         // INIT THE WRITER
 	String pageTitle = "" + pageToSave.getTitle();
-	String jsonFilePath = PATH_EPORTFOLIOS + SLASH + pageTitle + JSON_EXT;
+	String jsonFilePath = PATH_PAGES + pageTitle + JSON_EXT;
         System.out.println("jsonFilePth" + jsonFilePath);
 	OutputStream os = new FileOutputStream(jsonFilePath);
 	JsonWriter jsonFileWriter = Json.createWriter(os);
@@ -169,8 +237,6 @@ private JsonObject makeComponentJsonObject() {
     private JsonArray makeComponentsJsonArray(List<Component> components) {
         JsonArrayBuilder jsb = Json.createArrayBuilder();
         for(Component component : components) {
-            System.out.println("File path: " + component.getImageFilePath());
-                       System.out.println("File name: " + component.getImageFileName());
             if(component.getType().equals(IMAGE)) {
                 JsonObject jso = makeImageComponentObject(component);
                 jsb.add(jso);

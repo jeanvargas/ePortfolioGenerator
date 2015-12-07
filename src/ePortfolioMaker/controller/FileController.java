@@ -50,11 +50,26 @@ public class FileController {
             }
             
             if(continueToMakeNew) {
+                saved = false;
                 ui.updateToolbarControls(saved);
                 ui.reloadFileSiteControls();
                 }
             
         }
+    
+    public void handleSaveEportfolioRequest() {
+        ePortfolioModel toSave = ui.getEPortfolio();
+        
+        ePortfolioFileManager eportFileManager = new ePortfolioFileManager();
+        try {
+        eportFileManager.saveEPortfolio(toSave);
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_DATA_FILE_LOADING);
+        }
+        saved = true;
+        ui.updateToolbarControls(saved);
+    }
     
     public void handleNewPageReqest()   {
         PageModel newPage = new PageModel(ui);
@@ -62,16 +77,13 @@ public class FileController {
         ePortfolio.addNewPage(newPage);
         ePortfolio.setSelectedPage(newPage);
         ui.reloadPortfolioPages();
+        ui.updateSiteViewControls();
         //ui.addPage(newPage);
     }
     
     public void handleSiteViewerWorkspaceRequest() {
         SiteViewer siteViewer = new SiteViewer(ui);
-        System.out.println("page title: " + ui.getEPortfolio().getSelectedPage().getTitle());
-        System.out.println("page title of getPage: " + ui.getPage().getTitle());
-        System.out.println("type: " + ui.getPage().getComponents().get(0).getType());
 
-        
         ePortfolioFileManager eportFileManager = new ePortfolioFileManager();
         try {
         eportFileManager.savePage(ui.getEPortfolio().getSelectedPage());
@@ -83,7 +95,7 @@ public class FileController {
     }
     
     public void handlePageEditorWorkspaceRequest() {
-        ui.updateToolbarControls(saved);
+        ui.updateViewerToolbar();
     }
     
     public void handleAddTextComponentRequest() {
@@ -119,7 +131,7 @@ public class FileController {
     
     public void handleAddBannerRequest() {
         AddBannerDialogView addImage = new AddBannerDialogView();
-        addImage.processSelectImage();
+        addImage.processSelectImage(ui.getEPortfolio());
     }
     
     public void handleAddImageRequest() {
@@ -143,6 +155,7 @@ public class FileController {
     
     public void removePageRequest() {
         ui.getEPortfolio().removeSelectedPage();
+        ui.updateSiteViewControls();
     }
     
     public void editComponentRequest(Component comp) {

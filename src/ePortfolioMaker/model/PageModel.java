@@ -104,6 +104,7 @@ public class PageModel {
        Component compToAdd = new Component(data, type);
        components.add(compToAdd);
        ui.reloadPage();
+       
    }
    
    public void addComponent(ObservableList<String> array, String type) {

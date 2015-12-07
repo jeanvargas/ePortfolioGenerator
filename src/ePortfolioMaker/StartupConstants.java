@@ -130,6 +130,7 @@ public class StartupConstants {
     public static String LABEL_EPORTFOLIO_TITLE = "ePortfolio_title";
     public static String LABEL_PAGE_TITLE = "page_title";
     
+    public static String DEFAULT_EPORTFOLIO_TITLE = "default_title";
     public static String DEFAULT_STUDENT_NAME = "ENTER NAME";
     public static String DEFAULT_PAGE_TITLE = "ENTER PAGE TITLE";
  

@@ -6,6 +6,7 @@
 package ePortfolioMaker.model;
 
 import ePortfolioMaker.LanguagePropertyType;
+import static ePortfolioMaker.StartupConstants.DEFAULT_EPORTFOLIO_TITLE;
 import ePortfolioMaker.view.ePortfolioMakerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,7 @@ public class ePortfolioModel {
     public ePortfolioModel(ePortfolioMakerView initUI) {
         ui = initUI;
         pages = FXCollections.observableArrayList();
+        title = DEFAULT_EPORTFOLIO_TITLE;
         studentName = "Student Name";
         bannerImageFileName = "";
         bannerImageFileNamePath = "";
@@ -112,7 +114,8 @@ public class ePortfolioModel {
                 selectedPage = null;
             }
             ui.reloadPortfolioPages();
-        }       
+            ui.reloadPage();
+        }  
     }
     
     public void addNewPage(PageModel newPage) {

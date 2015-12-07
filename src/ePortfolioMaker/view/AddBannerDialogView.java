@@ -6,6 +6,7 @@
 package ePortfolioMaker.view;
 
 import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOW_IMAGES;
+import ePortfolioMaker.model.ePortfolioModel;
 import java.io.File;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 public class AddBannerDialogView {
 
     
-    public void processSelectImage() {
+    public void processSelectImage(ePortfolioModel ePortfolio) {
 	FileChooser imageFileChooser = new FileChooser();
 	
 	// SET THE STARTING DIRECTORY

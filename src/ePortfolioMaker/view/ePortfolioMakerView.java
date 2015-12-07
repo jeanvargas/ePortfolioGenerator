@@ -356,6 +356,10 @@ public void initEventHandlers(){
       reloadPortfolioPages();
   });
   
+  savePortfolioButton.setOnAction(e -> {
+      fileController.handleSaveEportfolioRequest();
+  });
+  
   newPortfolioButton.setOnAction(e -> {
   fileController.handleNewEPortfolioRequest();
   });
@@ -493,15 +497,23 @@ public void updateToolbarControls(boolean saved){
     //ENABLE BUTTONS
     addPageButton.setDisable(false);
     removePageButton.setDisable(false);
-    selectSiteViewerWorkspace.setDisable(false);
-    selectPageEditorWorkspace.setDisable(true);
+   // selectSiteViewerWorkspace.setDisable(false);
+   // selectPageEditorWorkspace.setDisable(false);
     
+    exportButton.setDisable(false);
     savePortfolioButton.setDisable(saved);
-    saveAsButton.setDisable(saved);
+    saveAsButton.setDisable(false);
 }
 
 public void reloadFileSiteControls() {
     
+}
+
+public void updateSiteViewControls() {
+    if(page.getComponents()==null || page.getComponents().isEmpty())
+        selectSiteViewerWorkspace.setDisable(true);
+    else
+        selectSiteViewerWorkspace.setDisable(false);
 }
 
 public void reloadPortfolioPages()
@@ -531,6 +543,7 @@ public void reloadPortfolioPages()
 }
 
 public void reloadPage() {
+    updateSiteViewControls();
     pageRepresentation.getChildren().clear();
     pageTitleField = new TextField();
     pageTitleField.setText(DEFAULT_PAGE_TITLE);
@@ -627,6 +640,14 @@ public void siteViewer(VBox siteViewer) {
     selectSiteViewerWorkspace.setDisable(true);
     addPageButton.setDisable(true);
     removePageButton.setDisable(true);
+}
+
+public void updateViewerToolbar() {
+    pmPane.setCenter(pageEditorWorkspace);
+    selectPageEditorWorkspace.setDisable(true);
+    selectSiteViewerWorkspace.setDisable(false);
+    addPageButton.setDisable(false);
+    removePageButton.setDisable(false);
 }
 
 /*public void testSiteToolbarPane() {
