@@ -148,11 +148,11 @@ public class Component {
     }
     
     public void setImageFilePath(String filePath) {
-        
+        imagePath = filePath;
     }
     
     public void setImageFileName(String fileName) {
-        
+        imageFileName = fileName;
     }
     
     public String getType(){

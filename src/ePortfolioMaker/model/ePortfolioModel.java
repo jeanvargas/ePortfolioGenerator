@@ -30,6 +30,8 @@ public class ePortfolioModel {
         ui = initUI;
         pages = FXCollections.observableArrayList();
         studentName = "Student Name";
+        bannerImageFileName = "";
+        bannerImageFileNamePath = "";
     }
     
     public void setBannerImageFileName(String s) {

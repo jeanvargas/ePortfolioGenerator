@@ -6,6 +6,7 @@
 package ePortfolioMaker.file;
 
 import static ePortfolioMaker.StartupConstants.IMAGE;
+import static ePortfolioMaker.StartupConstants.PATH_EPORTFOLIOS;
 import static ePortfolioMaker.StartupConstants.PATH_SLIDE_SHOWS;
 import static ePortfolioMaker.StartupConstants.SLIDESHOW;
 import static ePortfolioMaker.StartupConstants.TEXT;
@@ -152,8 +153,9 @@ private JsonObject makeComponentJsonObject() {
 	jsonWriter.close();
         
         // INIT THE WRITER
-	String slideShowTitle = "" + pageToSave.getTitle();
-	String jsonFilePath = PATH_SLIDE_SHOWS + SLASH + slideShowTitle + JSON_EXT;
+	String pageTitle = "" + pageToSave.getTitle();
+	String jsonFilePath = PATH_EPORTFOLIOS + SLASH + pageTitle + JSON_EXT;
+        System.out.println("jsonFilePth" + jsonFilePath);
 	OutputStream os = new FileOutputStream(jsonFilePath);
 	JsonWriter jsonFileWriter = Json.createWriter(os);
 	jsonFileWriter.writeObject(pageJsonObject);
@@ -167,6 +169,8 @@ private JsonObject makeComponentJsonObject() {
     private JsonArray makeComponentsJsonArray(List<Component> components) {
         JsonArrayBuilder jsb = Json.createArrayBuilder();
         for(Component component : components) {
+            System.out.println("File path: " + component.getImageFilePath());
+                       System.out.println("File name: " + component.getImageFileName());
             if(component.getType().equals(IMAGE)) {
                 JsonObject jso = makeImageComponentObject(component);
                 jsb.add(jso);
@@ -241,6 +245,10 @@ private JsonObject makeComponentJsonObject() {
     }
     
     private JsonObject makeImageComponentObject(Component component) {
+                       System.out.println("File path: " + component.getImageFilePath());
+                       System.out.println("File name: " + component.getImageFileName());
+
+
         JsonObject jso = Json.createObjectBuilder()
                 .add(JSON_IMAGE_COMPONENT_TYPE, component.getType())
                 .add(JSON_IMAGE_COMPONENT_FILE_PATH, component.getImageFilePath())

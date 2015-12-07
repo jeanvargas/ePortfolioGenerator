@@ -10,6 +10,7 @@ import static ePortfolioMaker.StartupConstants.SLIDESHOW;
 import static ePortfolioMaker.StartupConstants.TEXT;
 import ePortfolioMaker.error.ErrorHandler;
 import ePortfolioMaker.file.SlideShowFileManager;
+import ePortfolioMaker.file.ePortfolioFileManager;
 import ePortfolioMaker.model.Component;
 import ePortfolioMaker.model.PageModel;
 import ePortfolioMaker.model.ePortfolioModel;
@@ -66,6 +67,18 @@ public class FileController {
     
     public void handleSiteViewerWorkspaceRequest() {
         SiteViewer siteViewer = new SiteViewer(ui);
+        System.out.println("page title: " + ui.getEPortfolio().getSelectedPage().getTitle());
+        System.out.println("page title of getPage: " + ui.getPage().getTitle());
+        System.out.println("type: " + ui.getPage().getComponents().get(0).getType());
+
+        
+        ePortfolioFileManager eportFileManager = new ePortfolioFileManager();
+        try {
+        eportFileManager.savePage(ui.getEPortfolio().getSelectedPage());
+        } catch (IOException ioe) {
+            ErrorHandler eH = ui.getErrorHandler();
+            eH.processError(LanguagePropertyType.ERROR_DATA_FILE_LOADING);
+        }
         ui.siteViewer(siteViewer.getSiteViewer());
     }
     

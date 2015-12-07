@@ -121,6 +121,9 @@ public class PageModel {
       compToAdd.setImageCaption(caption);
       compToAdd.setImageFileName(fileName);
       compToAdd.setImageFilePath(filePath);
+      System.out.println("add component Image file name: " + compToAdd.getImageFileName());
+            System.out.println("add component Image file path: " + compToAdd.getImageFilePath());
+
       components.add(compToAdd);
       ui.reloadPage();
    }
